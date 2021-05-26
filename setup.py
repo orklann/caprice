@@ -16,7 +16,7 @@ def get_version():
 
 setup(
     name='caprice',
-    packages=find_packages(include=['caprice']),
+    packages=find_packages(include=['caprice'], exclude=['tests', 'tests.*', 'resources']),
     version=get_version(),
     url='https://github.com/orklann/caprice',
     description='Robust PDF generation library for Python',
