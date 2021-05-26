@@ -5,7 +5,7 @@ clean:
 	rm -rf build/ dist/
 
 test:
-	python3 -m unittest
+	python -m unittest
 	
 release: clean
 	# Check if latest tag is the current head we're releasing
@@ -17,5 +17,5 @@ release: clean
 
 force_release: clean
 	git push --tags
-	python3 setup.py sdist bdist_wheel
+	python setup.py sdist bdist_wheel
 	twine upload dist/*
