@@ -1,6 +1,8 @@
 # -*- coding=utf-8 -*-
 
 class GObject:
+    """Base class for all primitives class.
+    """
     UNDEFINED_NUMBER = -1
 
     def __init__(self):
@@ -9,6 +11,8 @@ class GObject:
         self.offset = self.UNDEFINED_NUMBER
 
 class GNumber(GObject):
+    """GNumber is the Python class for PDF number object.
+    """
     def __init__(self, val):
         super().__init__()
         self.value = val
