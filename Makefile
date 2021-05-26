@@ -4,6 +4,9 @@ all:
 clean:
 	rm -rf build/ dist/
 
+test:
+	python3 -m unittest
+	
 release: clean
 	# Check if latest tag is the current head we're releasing
 	echo "Latest tag = $$(git tag | sort -nr | head -n1)"
