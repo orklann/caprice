@@ -7,8 +7,8 @@ from setuptools import find_packages, setup
 setup(
     name='caprice',
     packages=find_packages(include=['caprice']),
-    version='0.1.0',
-    url='https://github.com/orklann/caprice'
+    version='0.1.1',
+    url='https://github.com/orklann/caprice',
     description='Robust PDF generation library for Python',
     long_description=__doc__,
     author='Aaron Elkins',
