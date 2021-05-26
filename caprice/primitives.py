@@ -23,3 +23,9 @@ class GNumber(GObject):
 
     def bytes(self):
         return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()

@@ -29,6 +29,19 @@ class TestGNumber(unittest.TestCase):
         self.assertEqual(n.bytes(), b"1")
         n = GNumber(1.2)
         self.assertEqual(n.bytes(), b"1.200000")
-    
+
+    def test_compile_str(self):
+        n = GNumber(1)
+        self.assertEqual(n.compile_str(), "1")
+        n = GNumber(1.2)
+        self.assertEqual(n.compile_str(), "1.200000")
+
+    def test_compile_bytes(self):
+        n = GNumber(1)
+        self.assertEqual(n.compile_bytes(), b"1")
+        n = GNumber(1.2)
+        self.assertEqual(n.compile_bytes(), b"1.200000")
+
+
 if __name__ == '__main__':
     unittest.main()
