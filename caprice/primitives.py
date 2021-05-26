@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-class GObject(object):
+class GObject:
     UNDEFINED_NUMBER = -1
 
     def __init__(self):
