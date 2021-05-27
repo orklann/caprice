@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 """
-Class represents PDF primitives objects
+Classes represents PDF primitives objects
 """
 
 UNDEFINED_NUMBER = -1
