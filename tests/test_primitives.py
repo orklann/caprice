@@ -1,6 +1,6 @@
 import unittest
 
-from caprice.primitives import GObject, GNumber, GBoolean
+from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 
 
 class TestGObject(unittest.TestCase):
@@ -57,6 +57,32 @@ class TestGBoolean(unittest.TestCase):
 
         b = GBoolean(False)
         self.assertEqual(b.compile_bytes(), b'false')
+
+
+class TestGLiteralString(unittest.TestCase):
+    def test_str(self):
+        ls = GLiteralString('This is a string')
+        self.assertEqual(ls.__str__(), '(This is a string)')
+        ls = GLiteralString('This is a string with a new line\n')
+        self.assertEqual(ls.__str__(), '(This is a string with a new line\\n)')
+        ls = GLiteralString("\n\r\t\b\f()\\")
+        self.assertEqual(ls.__str__(), "(\\n\\r\\t\\b\\f\\(\\)\\\\)")
+
+    def test_compile_str(self):
+        ls = GLiteralString('This is a string')
+        self.assertEqual(ls.compile_str(), '(This is a string)')
+        ls = GLiteralString('This is a string with a new line\n')
+        self.assertEqual(ls.compile_str(), '(This is a string with a new line\\n)')
+        ls = GLiteralString("\n\r\t\b\f()\\")
+        self.assertEqual(ls.compile_str(), "(\\n\\r\\t\\b\\f\\(\\)\\\\)")
+
+    def test_compile_bytes(self):
+        ls = GLiteralString('This is a string')
+        self.assertEqual(ls.compile_bytes(), b'(This is a string)')
+        ls = GLiteralString('This is a string with a new line\n')
+        self.assertEqual(ls.compile_bytes(), b'(This is a string with a new line\\n)')
+        ls = GLiteralString("\n\r\t\b\f()\\")
+        self.assertEqual(ls.compile_bytes(), b"(\\n\\r\\t\\b\\f\\(\\)\\\\)")
 
 if __name__ == '__main__':
     unittest.main()

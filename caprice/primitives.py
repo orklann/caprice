@@ -57,3 +57,43 @@ class GBoolean(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GLiteralString(GObject):
+    """GLiteralString is the Python class for PDF literal string object
+    """
+    ESCAPE_SEQUENCES = {
+        '\n': '\\n',
+        '\r': '\\r',
+        '\t': '\\t',
+        '\b': '\\b',
+        '\f': '\\f',
+        '(': '\\(',
+        ')': '\\)',
+        '\\': '\\\\'
+    }
+
+    def __init__(self, val):
+        super().__init__()
+        self.value = val
+
+    def __str__(self):
+        if not isinstance(self.value, str):
+            raise Exception("GLiteralString.value is not a str.")
+        result = "("
+        for c in self.value:
+            if c in self.ESCAPE_SEQUENCES:
+                esc = self.ESCAPE_SEQUENCES[c]
+            else:
+                esc = c
+            result += esc
+        result += ")"
+        return result
+
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()
