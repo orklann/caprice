@@ -121,3 +121,24 @@ class GHexString(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GName(GObject):
+    """GName is the Python class for PDF name objects.
+    """
+    def __init__(self, val):
+        super().__init__()
+        self.value = val
+
+    def __str__(self):
+        if not isinstance(self.value, str):
+            raise Exception("GName.value is not a str.")
+        return "/" + self.value
+
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()

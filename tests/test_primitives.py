@@ -1,7 +1,7 @@
 import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
-from caprice.primitives import GHexString
+from caprice.primitives import GHexString, GName
 
 
 class TestGObject(unittest.TestCase):
@@ -111,6 +111,23 @@ class TestGHexString(unittest.TestCase):
     def test_compile_bytes(self):
         h = GHexString("Hello, World!")
         self.assertEqual(h.compile_bytes(), b"<48656C6C6F2C20576F726C6421>")
+
+class TestGName(unittest.TestCase):
+    def test_str(self):
+        n = GName("Name1")
+        self.assertEqual(n.__str__(), "/Name1")
+
+    def test_bytes(self):
+        n = GName("Name1")
+        self.assertEqual(n.bytes(), b"/Name1")
+
+    def test_compile_str(self):
+        n = GName("Name1")
+        self.assertEqual(n.compile_str(), "/Name1")
+
+    def test_compile_bytes(self):
+        n = GName("Name1")
+        self.assertEqual(n.compile_bytes(), b"/Name1")
 
 if __name__ == '__main__':
     unittest.main()
