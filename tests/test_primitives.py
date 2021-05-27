@@ -129,5 +129,18 @@ class TestGName(unittest.TestCase):
         n = GName("Name1")
         self.assertEqual(n.compile_bytes(), b"/Name1")
 
+    def test_as_dict_key(self):
+        """Test GNmae as a dictionary key
+        """
+        key = GName("Font")
+        key2 = GName("Size")
+        dict = {}
+        dict[key] = "Arial"
+        dict[key2] = 12
+        self.assertEqual(dict[key], "Arial")
+        dict[key] = "Mono Serif"
+        self.assertEqual(dict[key], "Mono Serif")
+        self.assertEqual(dict[key2], 12)
+
 if __name__ == '__main__':
     unittest.main()

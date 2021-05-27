@@ -129,6 +129,12 @@ class GName(GObject):
         super().__init__()
         self.value = val
 
+    def __hash__(self):
+        return hash(self.value)
+
+    def __eq__(self, other):
+        return self.value == other.value
+
     def __str__(self):
         if not isinstance(self.value, str):
             raise Exception("GName.value is not a str.")
