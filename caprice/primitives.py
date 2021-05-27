@@ -1,15 +1,15 @@
 # -*- coding=utf-8 -*-
 
+UNDEFINED_NUMBER = -1
+
 class GObject:
     """
     Base class for all primitives class.
     """
-    UNDEFINED_NUMBER = -1
-
     def __init__(self):
-        self.obj_num = self.UNDEFINED_NUMBER
-        self.generation_num = self.UNDEFINED_NUMBER
-        self.offset = self.UNDEFINED_NUMBER
+        self.obj_num = UNDEFINED_NUMBER
+        self.generation_num = UNDEFINED_NUMBER
+        self.offset = UNDEFINED_NUMBER
 
 class GNumber(GObject):
     """
