@@ -130,7 +130,7 @@ class TestGName(unittest.TestCase):
         self.assertEqual(n.compile_bytes(), b"/Name1")
 
     def test_as_dict_key(self):
-        """Test GNmae as a dictionary key
+        """Test GName as a dictionary key
         """
         key = GName("Font")
         key2 = GName("Size")
