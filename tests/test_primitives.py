@@ -69,6 +69,9 @@ class TestGLiteralString(unittest.TestCase):
         self.assertEqual(ls.__str__(), "(\\n\\r\\t\\b\\f\\(\\)\\\\)")
         ls = GLiteralString("This is not a printable ASCII:\x80")
         self.assertEqual(ls.__str__(), "(This is not a printable ASCII:\x80)")
+        # Test character \x80 with value 0x80
+        s = ls.__str__()
+        self.assertEqual(ord(s[-2]), 0x80)
 
     def test_compile_str(self):
         ls = GLiteralString('This is a string')
