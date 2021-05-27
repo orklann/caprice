@@ -1,6 +1,6 @@
 import unittest
 
-from caprice.primitives import GObject, GNumber
+from caprice.primitives import GObject, GNumber, GBoolean
 
 
 class TestGObject(unittest.TestCase):
@@ -42,6 +42,21 @@ class TestGNumber(unittest.TestCase):
         n = GNumber(1.2)
         self.assertEqual(n.compile_bytes(), b"1.200000")
 
+
+class TestGBoolean(unittest.TestCase):
+    def test_compile_str(self):
+        b = GBoolean(True)
+        self.assertEqual(b.compile_str(), "true")
+
+        b = GBoolean(False)
+        self.assertEqual(b.compile_str(), "false")
+
+    def test_compile_bytes(self):
+        b = GBoolean(True)
+        self.assertEqual(b.compile_bytes(), b'true')
+
+        b = GBoolean(False)
+        self.assertEqual(b.compile_bytes(), b'false')
 
 if __name__ == '__main__':
     unittest.main()
