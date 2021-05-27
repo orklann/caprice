@@ -97,3 +97,27 @@ class GLiteralString(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GHexString(GObject):
+    """GHexString is the Python class for hexademical string object.
+    """
+    def __init__(self, val):
+        super().__init__()
+        self.value = val
+    
+    def __str__(self):
+        if not isinstance(self.value, str):
+            raise Exception("GHexString.value is not a str.")
+        result = "<"
+        result += "".join("{:02X}".format(ord(c)) for c in self.value)
+        result += ">"
+        return result
+
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()

@@ -1,6 +1,7 @@
 import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
+from caprice.primitives import GHexString
 
 
 class TestGObject(unittest.TestCase):
@@ -88,6 +89,23 @@ class TestGLiteralString(unittest.TestCase):
         self.assertEqual(ls.compile_bytes(), b'(This is a string with a new line\\n)')
         ls = GLiteralString("\n\r\t\b\f()\\")
         self.assertEqual(ls.compile_bytes(), b"(\\n\\r\\t\\b\\f\\(\\)\\\\)")
+
+class TestGHexString(unittest.TestCase):
+    def test_str(self):
+        h = GHexString("Hello, World!")
+        self.assertEqual(h.__str__(), "<48656C6C6F2C20576F726C6421>")
+
+    def test_bytes(self):
+        h = GHexString("Hello, World!")
+        self.assertEqual(h.bytes(), b"<48656C6C6F2C20576F726C6421>")
+
+    def test_compile_str(self):
+        h = GHexString("Hello, World!")
+        self.assertEqual(h.compile_str(), "<48656C6C6F2C20576F726C6421>")
+
+    def test_compile_bytes(self):
+        h = GHexString("Hello, World!")
+        self.assertEqual(h.compile_bytes(), b"<48656C6C6F2C20576F726C6421>")
 
 if __name__ == '__main__':
     unittest.main()
