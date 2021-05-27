@@ -89,6 +89,11 @@ class TestGLiteralString(unittest.TestCase):
         self.assertEqual(ls.compile_bytes(), b'(This is a string with a new line\\n)')
         ls = GLiteralString("\n\r\t\b\f()\\")
         self.assertEqual(ls.compile_bytes(), b"(\\n\\r\\t\\b\\f\\(\\)\\\\)")
+        ls = GLiteralString("This is not a printable ASCII:\x80")
+        self.assertEqual(ls.__str__(), "(This is not a printable ASCII:\x80)")
+        # Test byte \x80 with value 0x80
+        bytes = ls.bytes()
+        self.assertEqual(bytes[-2], 0x80)
 
 class TestGHexString(unittest.TestCase):
     def test_str(self):
