@@ -1,7 +1,8 @@
 # -*- coding=utf-8 -*-
 
 class GObject:
-    """Base class for all primitives class.
+    """
+    Base class for all primitives class.
     """
     UNDEFINED_NUMBER = -1
 
@@ -11,7 +12,8 @@ class GObject:
         self.offset = self.UNDEFINED_NUMBER
 
 class GNumber(GObject):
-    """GNumber is the Python class for PDF number object.
+    """
+    GNumber is the Python class for PDF number object.
     """
     def __init__(self, val):
         super().__init__()
@@ -35,7 +37,8 @@ class GNumber(GObject):
         return self.bytes()
 
 class GBoolean(GObject):
-    """GBoolean is the Python class for PDF boolean object.
+    """
+    GBoolean is the Python class for PDF boolean object.
     """
     def __init__(self, val):
         super().__init__()
@@ -59,7 +62,8 @@ class GBoolean(GObject):
         return self.bytes()
 
 class GLiteralString(GObject):
-    """GLiteralString is the Python class for PDF literal string object
+    """
+    GLiteralString is the Python class for PDF literal string object
     """
     ESCAPE_SEQUENCES = {
         '\n': '\\n',
@@ -99,7 +103,8 @@ class GLiteralString(GObject):
         return self.bytes()
 
 class GHexString(GObject):
-    """GHexString is the Python class for hexademical string object.
+    """
+    GHexString is the Python class for hexademical string object.
     """
     def __init__(self, val):
         super().__init__()
@@ -123,7 +128,8 @@ class GHexString(GObject):
         return self.bytes()
 
 class GName(GObject):
-    """GName is the Python class for PDF name objects.
+    """
+    GName is the Python class for PDF name objects.
     """
     def __init__(self, val):
         super().__init__()
