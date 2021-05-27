@@ -132,6 +132,9 @@ class GName(GObject):
     def __str__(self):
         if not isinstance(self.value, str):
             raise Exception("GName.value is not a str.")
+        # We compile GName by using the simplest method: Adding `/`` at the 
+        # beginning, Because we assume self.value we pass in will be a normal 
+        # string without special characters. For more details, see 7.3.5 
         return "/" + self.value
 
     def bytes(self):
