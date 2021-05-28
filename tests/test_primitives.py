@@ -1,6 +1,4 @@
 import unittest
-from unittest.case import expectedFailure
-
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
 from caprice.primitives import GStream, GIndirect
@@ -8,6 +6,9 @@ from caprice.primitives import UNDEFINED_NUMBER
 import zlib
 
 class TestGNumber(unittest.TestCase):
+    def test_type(self):
+        self.assertRaises(TypeError, GNumber, "1")
+
     def test_str(self):
         n = GNumber(1)
         self.assertEqual(n.__str__(), "1")
@@ -34,6 +35,9 @@ class TestGNumber(unittest.TestCase):
 
 
 class TestGBoolean(unittest.TestCase):
+    def test_type(self):
+        self.assertRaises(TypeError, GBoolean, "True")
+
     def test_compile_str(self):
         b = GBoolean(True)
         self.assertEqual(b.compile_str(), "true")
@@ -50,6 +54,9 @@ class TestGBoolean(unittest.TestCase):
 
 
 class TestGLiteralString(unittest.TestCase):
+    def test_type(self):
+        self.assertRaises(TypeError, GLiteralString, 1)
+
     def test_str(self):
         ls = GLiteralString('This is a string')
         self.assertEqual(ls.__str__(), '(This is a string)')
@@ -85,6 +92,9 @@ class TestGLiteralString(unittest.TestCase):
         self.assertEqual(bytes[-2], 0x80)
 
 class TestGHexString(unittest.TestCase):
+    def test_type(self):
+        self.assertRaises(TypeError, GHexString, 1)
+
     def test_str(self):
         h = GHexString("Hello, World!")
         self.assertEqual(h.__str__(), "<48656C6C6F2C20576F726C6421>")
@@ -102,6 +112,9 @@ class TestGHexString(unittest.TestCase):
         self.assertEqual(h.compile_bytes(), b"<48656C6C6F2C20576F726C6421>")
 
 class TestGName(unittest.TestCase):
+    def test_type(self):
+        self.assertRaises(TypeError, GName, 1)
+
     def test_str(self):
         n = GName("Name1")
         self.assertEqual(n.__str__(), "/Name1")
@@ -141,26 +154,35 @@ class TestGNull(unittest.TestCase):
         self.assertEqual(n.compile_bytes(), b"null")
 
 class TestGArray(unittest.TestCase):
+    def test_type(self):
+        a = GArray()
+        self.assertRaises(TypeError, a.append, 1)
+
     def test_compile_str(self):
         a = GArray()
-        a.array.append(GName("Font"))
-        a.array.append(GNull())
-        a.array.append(GNumber(3.14))
-        a.array.append(GBoolean(False))
-        a.array.append(GLiteralString("Hello"))
+        a.append(GName("Font"))
+        a.append(GNull())
+        a.append(GNumber(3.14))
+        a.append(GBoolean(False))
+        a.append(GLiteralString("Hello"))
         self.assertEqual(a.compile_str(), "[/Font null 3.14 false (Hello)]")
 
     def test_compile_bytes(self):
         a = GArray()
-        a.array.append(GName("Font"))
-        a.array.append(GNull())
-        a.array.append(GNumber(3.14))
-        a.array.append(GBoolean(False))
-        a.array.append(GLiteralString("Hello"))
+        a.append(GName("Font"))
+        a.append(GNull())
+        a.append(GNumber(3.14))
+        a.append(GBoolean(False))
+        a.append(GLiteralString("Hello"))
         self.assertEqual(a.compile_bytes(), b"[/Font null 3.14 false (Hello)]")
 
 
 class TestGDictionary(unittest.TestCase):
+    def test_type(self):
+        d = GDictionary()
+        self.assertRaises(TypeError, d.set, GHexString("key"), GName("value"))
+        self.assertRaises(TypeError, d.set, GName("key"), 1)
+
     def test_key_value(self):
         d = GDictionary()
         d.set(GName("Font"), GName("Arial"))
@@ -200,15 +222,19 @@ class TestGDictionary(unittest.TestCase):
         self.assertEqual(d.compile_bytes(), expect)
 
 class TestGStream(unittest.TestCase):
+    def test_type(self):
+        s = GStream()
+        self.assertRaises(TypeError, s.set_content, (b"Hello, World"))
+
     def test_dict(self):
         s = GStream()
-        s.set_content(b"Hello, World")
+        s.set_content("Hello, World")
         s.bytes()
         self.assertEqual(s.dict.compile_str(), "<</Length 20 /Filter /FlateDecode>>")
 
     def test_encode(self):
         s = GStream()
-        s.set_content(b"Hello, World!")
+        s.set_content("Hello, World!")
         encoded_bytes = s.encoded_bytes()
         decoded_bytes = zlib.decompress(encoded_bytes)
         self.assertEqual(decoded_bytes, s.content)
@@ -218,14 +244,21 @@ class TestGStream(unittest.TestCase):
         # Result: Passing
 
 class TestGIndirect(unittest.TestCase):
+    def test_type(self):
+        i = GIndirect()
+        self.assertRaises(TypeError, i.set_obj_num, 1.0)
+        self.assertRaises(TypeError, i.set_generation_num, 1.0)
+        self.assertRaises(TypeError, i.set_offset, 1.0)
+        self.assertRaises(TypeError, i.set_object, 1.0)
+
     def test_compile_bytes(self):
         i = GIndirect()
-        i.obj_num = 1
-        i.generation_num = 0
+        i.set_obj_num(1)
+        i.set_generation_num(0)
         d = GDictionary()
         d.set(GName("Key1"), GName("Val1"))
         d.set(GName("Key2"), GNumber(1))
-        i.object = d
+        i.set_object(d)
         expect = b"1 0 obj\r\n<</Key1 /Val1 /Key2 1>>\r\nendobj\r\n"
         self.assertEqual(i.compile_bytes(), expect)
         # Test exception for object is None

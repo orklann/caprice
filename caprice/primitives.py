@@ -17,6 +17,8 @@ class GNumber(GObject):
     """GNumber is the Python class for PDF number object.
     """
     def __init__(self, val):
+        if not isinstance(val, (int, float)):
+            raise TypeError("GNumber's value must be int or float")
         super().__init__()
         self.value = val
     
@@ -41,6 +43,8 @@ class GBoolean(GObject):
     """GBoolean is the Python class for PDF boolean object.
     """
     def __init__(self, val):
+        if not isinstance(val, bool):
+            raise TypeError("GBoolean's value must be a bool.")
         super().__init__()
         self.value = val;
 
@@ -76,6 +80,8 @@ class GLiteralString(GObject):
     }
 
     def __init__(self, val):
+        if not isinstance(val, str):
+            raise TypeError("GLiteralString's value must be a str")
         super().__init__()
         self.value = val
 
@@ -105,6 +111,8 @@ class GHexString(GObject):
     """GHexString is the Python class for hexademical string object.
     """
     def __init__(self, val):
+        if not isinstance(val, str):
+            raise TypeError("GHexString's value must be a str.")
         super().__init__()
         self.value = val
     
@@ -129,6 +137,8 @@ class GName(GObject):
     """GName is the Python class for PDF name objects.
     """
     def __init__(self, val):
+        if not isinstance(val, str):
+            raise TypeError("GName's value must be a str.")
         super().__init__()
         self.value = val
 
@@ -187,6 +197,13 @@ class GArray(GObject):
         result += "]"
         return result
 
+    def append(self, val):
+        if not isinstance(val, (GBoolean, GHexString, GArray, GDictionary,\
+            GNull, GNumber, GLiteralString, GName)):
+            raise TypeError("GArray's append method's input is not invalid: "\
+             + str(type(val)))
+        self.array.append(val)
+
     def bytes(self):
         return str.encode(self.__str__())
 
@@ -206,6 +223,10 @@ class GDictionary(GObject):
     def set(self, key, obj):
         if not isinstance(key, GName):
             raise TypeError("GDictionary's key must be a GName instance, for set() method.")
+        if not isinstance(obj, (GBoolean, GHexString, GArray, GDictionary,\
+            GNull, GNumber, GLiteralString, GName)):
+            raise TypeError("GDictionary's `obj` parameter in set method is not invalid: "\
+             + str(type(obj)))
         self.dict[key] = obj
 
     def get(self, key):
@@ -236,7 +257,9 @@ class GStream(GObject):
         self.content = b""
 
     def set_content(self, c):
-        self.content = c
+        if not isinstance(c, str):
+            raise TypeError("GStream's `c` paramter of set_content method is not a str.")
+        self.content = str.encode(c)
 
     def bytes(self):
         # Flate encoder by zlib
@@ -276,6 +299,28 @@ class GIndirect(GObject):
         self.offset = UNDEFINED_NUMBER
         self.object = None
     
+    def set_obj_num(self, val):
+        if not isinstance(val, int):
+            raise TypeError("GIndirect's set_obj_num()'s argument is not a int")
+        self.obj_num = val
+
+    def set_generation_num(self, val):
+        if not isinstance(val, int):
+            raise TypeError("GIndirect's set_generation_num()'s argument is not a int")
+        self.generation_num = val
+
+    def set_offset(self, val):
+        if not isinstance(val, int):
+            raise TypeError("GIndirect's set_offset()'s argument is not a int")
+        self.offse = val
+
+    def set_object(self, obj):
+        if not isinstance(obj, (GBoolean, GHexString, GArray, GDictionary,\
+            GNull, GNumber, GLiteralString, GName, GStream)):
+            raise TypeError("GIndirect's set_object()'s argument is invalid: " \
+                + str(type(obj)))
+        self.object = obj
+
     def bytes(self):
         if self.object is None:
             raise Exception("GIndirect's object is None.")
