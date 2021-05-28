@@ -1,7 +1,7 @@
 import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
-from caprice.primitives import GHexString, GName, GNull, GArray
+from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
 from caprice.primitives import UNDEFINED_NUMBER
 
 
@@ -176,6 +176,46 @@ class TestGArray(unittest.TestCase):
         a.array.append(GBoolean(False))
         a.array.append(GLiteralString("Hello"))
         self.assertEqual(a.compile_bytes(), b"[/Font null 3.14 false (Hello)]")
+
+
+class TestGDictionary(unittest.TestCase):
+    def test_key(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        self.assertEqual(d.get(GName("Font")), GName("Arial"))
+        self.assertRaises(Exception, d.set, GLiteralString("Font2"), GName("Mono"))
+
+    def test_str(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        d.set(GName("GS"), GNumber(3.14))
+        d.set(GName("Encoding"), GLiteralString("UTF-8"))
+        expect = "<</Font /Arial /GS 3.14 /Encoding (UTF-8)>>"
+        self.assertEqual(d.__str__(), expect)
+
+    def test_bytes(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        d.set(GName("GS"), GNumber(3.14))
+        d.set(GName("Encoding"), GLiteralString("UTF-8"))
+        expect = b"<</Font /Arial /GS 3.14 /Encoding (UTF-8)>>"
+        self.assertEqual(d.bytes(), expect)
+
+    def test_compile_str(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        d.set(GName("GS"), GNumber(3.14))
+        d.set(GName("Encoding"), GLiteralString("UTF-8"))
+        expect = "<</Font /Arial /GS 3.14 /Encoding (UTF-8)>>"
+        self.assertEqual(d.compile_str(), expect)
+
+    def test_compile_bytes(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        d.set(GName("GS"), GNumber(3.14))
+        d.set(GName("Encoding"), GLiteralString("UTF-8"))
+        expect = b"<</Font /Arial /GS 3.14 /Encoding (UTF-8)>>"
+        self.assertEqual(d.compile_bytes(), expect)
 
 if __name__ == '__main__':
     unittest.main()

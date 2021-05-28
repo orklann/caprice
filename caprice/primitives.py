@@ -206,3 +206,35 @@ class GArray(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GDictionary(GObject):
+    """
+    GDictionary is the Python class for PDF dictionary object.
+    """
+    def __init__(self):
+        super().__init__()
+        self.dict = {}
+
+    def set(self, key, obj):
+        if not isinstance(key, GName):
+            raise Exception("GDictionary's key must be a GName instance, for set() method.")
+        self.dict[key] = obj
+
+    def get(self, key):
+        return self.dict[key]
+
+    def __str__(self):
+        result = "<<"
+        result += " ".join(key.compile_str() + " " + val.compile_str() \
+            for key, val in self.dict.items())
+        result += ">>"
+        return result
+    
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()
