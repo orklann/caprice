@@ -251,13 +251,16 @@ class GStream(GObject):
     def bytes(self):
         # Flate encoder by zlib
         encoded_bytes = self.encoded_bytes()
+        
         # Set /Length in dictionary 
         length = len(encoded_bytes)
         self.dict.set(GName("Length"), GNumber(length))
+        
         # We use FlateDecode filter, that's to say, 
         # we encode content by using flate encode.
         # Set /Filter in dictionary
         self.dict.set(GName("Filter"), GName("FlateDecode"))
+
         # Construct result as bytes
         result = self.dict.compile_bytes() + b"\r\n" # dictionary bytes
         result += b"stream\r\n" # stream keyword bytes
