@@ -160,22 +160,22 @@ class TestGNull(unittest.TestCase):
 
 class TestGArray(unittest.TestCase):
     def test_compile_str(self):
-        array = GArray()
-        array.append(GName("Font"))
-        array.append(GNull())
-        array.append(GNumber(3.14))
-        array.append(GBoolean(False))
-        array.append(GLiteralString("Hello"))
-        self.assertEqual(array.compile_str(), "[ /Font null 3.14 false (Hello) ]")
+        a = GArray()
+        a.array.append(GName("Font"))
+        a.array.append(GNull())
+        a.array.append(GNumber(3.14))
+        a.array.append(GBoolean(False))
+        a.array.append(GLiteralString("Hello"))
+        self.assertEqual(a.compile_str(), "[ /Font null 3.14 false (Hello) ]")
 
     def test_compile_bytes(self):
-        array = GArray()
-        array.append(GName("Font"))
-        array.append(GNull())
-        array.append(GNumber(3.14))
-        array.append(GBoolean(False))
-        array.append(GLiteralString("Hello"))
-        self.assertEqual(array.compile_bytes(), b"[ /Font null 3.14 false (Hello) ]")
+        a = GArray()
+        a.array.append(GName("Font"))
+        a.array.append(GNull())
+        a.array.append(GNumber(3.14))
+        a.array.append(GBoolean(False))
+        a.array.append(GLiteralString("Hello"))
+        self.assertEqual(a.compile_bytes(), b"[ /Font null 3.14 false (Hello) ]")
 
 if __name__ == '__main__':
     unittest.main()

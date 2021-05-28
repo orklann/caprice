@@ -200,9 +200,6 @@ class GArray(GObject):
         result += "]"
         return result
 
-    def append(self, v):
-        self.array.append(v)
-
     def bytes(self):
         return str.encode(self.__str__())
 
