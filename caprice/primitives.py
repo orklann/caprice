@@ -8,15 +8,13 @@ import zlib
 UNDEFINED_NUMBER = -1
 
 class GObject:
-    """
-    Base class for all primitives class.
+    """Base class for all primitives class.
     """
     def __init__(self):
         pass
 
 class GNumber(GObject):
-    """
-    GNumber is the Python class for PDF number object.
+    """GNumber is the Python class for PDF number object.
     """
     def __init__(self, val):
         super().__init__()
@@ -40,8 +38,7 @@ class GNumber(GObject):
         return self.bytes()
 
 class GBoolean(GObject):
-    """
-    GBoolean is the Python class for PDF boolean object.
+    """GBoolean is the Python class for PDF boolean object.
     """
     def __init__(self, val):
         super().__init__()
@@ -65,8 +62,7 @@ class GBoolean(GObject):
         return self.bytes()
 
 class GLiteralString(GObject):
-    """
-    GLiteralString is the Python class for PDF literal string object
+    """GLiteralString is the Python class for PDF literal string object
     """
     ESCAPE_SEQUENCES = {
         '\n': '\\n',
@@ -106,8 +102,7 @@ class GLiteralString(GObject):
         return self.bytes()
 
 class GHexString(GObject):
-    """
-    GHexString is the Python class for hexademical string object.
+    """GHexString is the Python class for hexademical string object.
     """
     def __init__(self, val):
         super().__init__()
@@ -131,8 +126,7 @@ class GHexString(GObject):
         return self.bytes()
 
 class GName(GObject):
-    """
-    GName is the Python class for PDF name objects.
+    """GName is the Python class for PDF name objects.
     """
     def __init__(self, val):
         super().__init__()
@@ -162,8 +156,7 @@ class GName(GObject):
         return self.bytes()
 
 class GNull(GObject):
-    """
-    GNull is the Python class for PDF null object
+    """GNull is the Python class for PDF null object
     """
     def __init__(self):
         super().__init__()
@@ -182,8 +175,7 @@ class GNull(GObject):
 
 
 class GArray(GObject):
-    """
-    GArray is the Python class for PDF array object
+    """GArray is the Python class for PDF array object
     """
     def __init__(self):
         super().__init__()
@@ -205,8 +197,7 @@ class GArray(GObject):
         return self.bytes()
 
 class GDictionary(GObject):
-    """
-    GDictionary is the Python class for PDF dictionary object.
+    """GDictionary is the Python class for PDF dictionary object.
     """
     def __init__(self):
         super().__init__()
@@ -237,8 +228,7 @@ class GDictionary(GObject):
         return self.bytes()
 
 class GStream(GObject):
-    """
-    GStream is the Python class for PDF stream object.
+    """GStream is the Python class for PDF stream object.
     """
     def __init__(self):
         super().__init__()
@@ -277,8 +267,7 @@ class GStream(GObject):
         return self.bytes()
 
 class GIndirect(GObject):
-    """
-    GIndirect is the Python class for PDF indirect object.
+    """GIndirect is the Python class for PDF indirect object.
     """
     def __init__(self):
         super().__init__()
