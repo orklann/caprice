@@ -8,9 +8,9 @@ from caprice.primitives import UNDEFINED_NUMBER
 class TestGObject(unittest.TestCase):
     def test_attrs(self):
         o = GObject()
-        self.assertEqual(o.obj_num, -1)
-        self.assertEqual(o.generation_num, -1)
-        self.assertEqual(o.offset, -1)
+        self.assertEqual(o.obj_num, UNDEFINED_NUMBER)
+        self.assertEqual(o.generation_num, UNDEFINED_NUMBER)
+        self.assertEqual(o.offset, UNDEFINED_NUMBER)
         o.obj_num = 1
         o.generation_num = 0
         o.offset = 1024
