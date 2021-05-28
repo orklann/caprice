@@ -165,7 +165,7 @@ class TestGDictionary(unittest.TestCase):
         d = GDictionary()
         d.set(GName("Font"), GName("Arial"))
         self.assertEqual(d.get(GName("Font")), GName("Arial"))
-        self.assertRaises(Exception, d.set, GLiteralString("Font2"), GName("Mono"))
+        self.assertRaises(TypeError, d.set, GLiteralString("Font2"), GName("Mono"))
 
     def test_str(self):
         d = GDictionary()

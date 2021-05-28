@@ -28,7 +28,7 @@ class GNumber(GObject):
         elif isinstance(self.value, float):
             return str(self.value)
         else:
-            raise Exception('GNumber.value is invalid, should be either int or float')
+            raise TypeError('GNumber.value is invalid, should be either int or float')
 
     def bytes(self):
         return str.encode(self.__str__())
@@ -49,7 +49,7 @@ class GBoolean(GObject):
 
     def __str__(self):
         if not isinstance(self.value, bool):
-            raise Exception('GBoolean.value is not a bool value.')
+            raise TypeError('GBoolean.value is not a bool value.')
         if self.value:
             return "true"
         else:
@@ -85,7 +85,7 @@ class GLiteralString(GObject):
 
     def __str__(self):
         if not isinstance(self.value, str):
-            raise Exception("GLiteralString.value is not a str.")
+            raise TypeError("GLiteralString.value is not a str.")
         result = "("
         for c in self.value:
             if c in self.ESCAPE_SEQUENCES:
@@ -115,7 +115,7 @@ class GHexString(GObject):
     
     def __str__(self):
         if not isinstance(self.value, str):
-            raise Exception("GHexString.value is not a str.")
+            raise TypeError("GHexString.value is not a str.")
         result = "<"
         result += "".join("{:02X}".format(ord(c)) for c in self.value)
         result += ">"
@@ -146,7 +146,7 @@ class GName(GObject):
 
     def __str__(self):
         if not isinstance(self.value, str):
-            raise Exception("GName.value is not a str.")
+            raise TypeError("GName.value is not a str.")
         # We compile GName by using the simplest method: Adding `/`` at the 
         # beginning, Because we assume self.value we pass in will be a normal 
         # string without special characters. For more details, see 7.3.5 
@@ -214,7 +214,7 @@ class GDictionary(GObject):
 
     def set(self, key, obj):
         if not isinstance(key, GName):
-            raise Exception("GDictionary's key must be a GName instance, for set() method.")
+            raise TypeError("GDictionary's key must be a GName instance, for set() method.")
         self.dict[key] = obj
 
     def get(self, key):
