@@ -1,7 +1,8 @@
 import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
-from caprice.primitives import GHexString, GName
+from caprice.primitives import GHexString, GName, GNull
+from caprice.primitives import UNDEFINED_NUMBER
 
 
 class TestGObject(unittest.TestCase):
@@ -141,6 +142,21 @@ class TestGName(unittest.TestCase):
         dict[key] = "Mono Serif"
         self.assertEqual(dict[key], "Mono Serif")
         self.assertEqual(dict[key2], 12)
+
+class TestGNull(unittest.TestCase):
+    def test_compile_str(self):
+        n = GNull()
+        self.assertEqual(n.compile_str(), "null")
+
+    def test_compile_bytes(self):
+        n = GNull()
+        self.assertEqual(n.compile_bytes(), b"null")
+
+    def test_super_class(self):
+        n = GNull()
+        self.assertEqual(n.obj_num, UNDEFINED_NUMBER)
+        n.obj_num = 2
+        self.assertEqual(n.obj_num, 2)
 
 if __name__ == '__main__':
     unittest.main()

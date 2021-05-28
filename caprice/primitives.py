@@ -160,3 +160,20 @@ class GName(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GNull(GObject):
+    def __init__(self):
+        super().__init__()
+
+    def __str__(self):
+        return "null"
+
+    def bytes(self):
+        return str.encode("null")
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()
+
