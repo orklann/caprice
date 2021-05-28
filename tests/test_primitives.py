@@ -179,7 +179,7 @@ class TestGArray(unittest.TestCase):
 
 
 class TestGDictionary(unittest.TestCase):
-    def test_key(self):
+    def test_key_value(self):
         d = GDictionary()
         d.set(GName("Font"), GName("Arial"))
         self.assertEqual(d.get(GName("Font")), GName("Arial"))
