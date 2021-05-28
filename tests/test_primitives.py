@@ -1,7 +1,7 @@
 import unittest
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
-from caprice.primitives import GStream, GIndirect
+from caprice.primitives import GStream, GIndirect, GRef
 from caprice.primitives import UNDEFINED_NUMBER
 import zlib
 
@@ -264,6 +264,18 @@ class TestGIndirect(unittest.TestCase):
         # Test exception for object is None
         i = GIndirect()
         self.assertRaises(Exception, i.compile_bytes)
+
+class TestGRef(unittest.TestCase):
+    def test_type(self):
+        r = GRef()
+        self.assertRaises(TypeError, r.set_obj_num, 1.0)
+        self.assertRaises(TypeError, r.set_generation_num, 1.0)
+
+    def test_compile_bytes(self):
+        r = GRef()
+        r.set_obj_num(1)
+        r.set_generation_num(0)
+        self.assertEqual(r.compile_bytes(), b"1 0 R")
 
 if __name__ == '__main__':
     unittest.main()

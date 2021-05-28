@@ -334,3 +334,35 @@ class GIndirect(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GRef(GObject):
+    """GRef is the Python class for PDF ref string. 
+    A ref string is like: 1 0 R
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.obj_num = UNDEFINED_NUMBER
+        self.generation_num = UNDEFINED_NUMBER
+
+    def set_obj_num(self, val):
+        if not isinstance(val, int):
+            raise TypeError("GRef's set_obj_num()'s argument is not a int")
+        self.obj_num = val
+
+    def set_generation_num(self, val):
+        if not isinstance(val, int):
+            raise TypeError("GRef's set_generation_num()'s argument is not a int")
+        self.generation_num = val
+
+    def __str__(self):
+        return "%d %d R" % (self.obj_num, self.generation_num)
+
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()
