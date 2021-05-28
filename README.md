@@ -4,4 +4,4 @@
 
 [![Run Tests](https://github.com/orklann/caprice/actions/workflows/main.yml/badge.svg)](https://github.com/orklann/caprice/actions/workflows/main.yml)  
 
-**Caprice** is a robust PDF generation libary for Python.
+**Caprice** is a robust Python library for generating PDF.

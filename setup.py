@@ -1,5 +1,5 @@
 """
-Caprice is a robust PDF generation library for Python
+Caprice is a robust Python library for generating PDF.
 """
 import os
 from setuptools import find_packages, setup
@@ -19,7 +19,7 @@ setup(
     packages=find_packages(include=['caprice'], exclude=['tests', 'tests.*', 'resources']),
     version=get_version(),
     url='https://github.com/orklann/caprice',
-    description='Robust PDF generation library for Python',
+    description='Robust Python library for generating PDF',
     long_description=__doc__,
     author='Aaron Elkins',
     author_email='threcius@yahoo.com',
