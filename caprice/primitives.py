@@ -266,7 +266,8 @@ class GStream(GObject):
         return result
 
     def encoded_bytes(self):
-        # Flate encoder by zlib
+        # Flate encoder by zlib, flate encoding is our default encoding for
+        # GStream object.
         return zlib.compress(self.content)
 
     def compile_bytes(self):
