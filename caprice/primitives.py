@@ -193,10 +193,8 @@ class GArray(GObject):
         self.array = []
 
     def __str__(self):
-        result = "[ "
-        for ele in self.array:
-            result += ele.compile_str()
-            result += " "
+        result = "["
+        result += " ".join(ele.compile_str() for ele in self.array)
         result += "]"
         return result
 

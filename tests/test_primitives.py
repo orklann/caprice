@@ -166,7 +166,7 @@ class TestGArray(unittest.TestCase):
         a.array.append(GNumber(3.14))
         a.array.append(GBoolean(False))
         a.array.append(GLiteralString("Hello"))
-        self.assertEqual(a.compile_str(), "[ /Font null 3.14 false (Hello) ]")
+        self.assertEqual(a.compile_str(), "[/Font null 3.14 false (Hello)]")
 
     def test_compile_bytes(self):
         a = GArray()
@@ -175,7 +175,7 @@ class TestGArray(unittest.TestCase):
         a.array.append(GNumber(3.14))
         a.array.append(GBoolean(False))
         a.array.append(GLiteralString("Hello"))
-        self.assertEqual(a.compile_bytes(), b"[ /Font null 3.14 false (Hello) ]")
+        self.assertEqual(a.compile_bytes(), b"[/Font null 3.14 false (Hello)]")
 
 if __name__ == '__main__':
     unittest.main()
