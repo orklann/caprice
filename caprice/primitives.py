@@ -13,9 +13,7 @@ class GObject:
     Base class for all primitives class.
     """
     def __init__(self):
-        self.obj_num = UNDEFINED_NUMBER
-        self.generation_num = UNDEFINED_NUMBER
-        self.offset = UNDEFINED_NUMBER
+        pass
 
 class GNumber(GObject):
     """

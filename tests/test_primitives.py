@@ -4,21 +4,6 @@ from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
 from caprice.primitives import UNDEFINED_NUMBER
 
-
-class TestGObject(unittest.TestCase):
-    def test_attrs(self):
-        o = GObject()
-        self.assertEqual(o.obj_num, UNDEFINED_NUMBER)
-        self.assertEqual(o.generation_num, UNDEFINED_NUMBER)
-        self.assertEqual(o.offset, UNDEFINED_NUMBER)
-        o.obj_num = 1
-        o.generation_num = 0
-        o.offset = 1024
-        self.assertEqual(o.obj_num, 1)
-        self.assertEqual(o.generation_num, 0)
-        self.assertEqual(o.offset, 1024)
-    
-
 class TestGNumber(unittest.TestCase):
     def test_str(self):
         n = GNumber(1)
@@ -151,12 +136,6 @@ class TestGNull(unittest.TestCase):
     def test_compile_bytes(self):
         n = GNull()
         self.assertEqual(n.compile_bytes(), b"null")
-
-    def test_super_class(self):
-        n = GNull()
-        self.assertEqual(n.obj_num, UNDEFINED_NUMBER)
-        n.obj_num = 2
-        self.assertEqual(n.obj_num, 2)
 
 class TestGArray(unittest.TestCase):
     def test_compile_str(self):
