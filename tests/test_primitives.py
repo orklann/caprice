@@ -211,6 +211,10 @@ class TestGStream(unittest.TestCase):
         encoded_bytes = s.encoded_bytes()
         decoded_bytes = zlib.decompress(encoded_bytes)
         self.assertEqual(decoded_bytes, s.content)
+        # We have tested the encoded stream by using external app `PEP` with it's 
+        # Tests framework.
+        # The test file is: caprice_stream.bin in `PEPTests/pdf`
+        # Result: Passing
 
 if __name__ == '__main__':
     unittest.main()
