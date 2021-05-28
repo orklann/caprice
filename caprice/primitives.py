@@ -162,6 +162,9 @@ class GName(GObject):
         return self.bytes()
 
 class GNull(GObject):
+    """
+    GNull is the Python class for PDF null object
+    """
     def __init__(self):
         super().__init__()
 
