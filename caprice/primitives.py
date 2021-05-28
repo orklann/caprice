@@ -3,6 +3,8 @@
 Classes represents PDF primitives objects
 """
 
+import zlib
+
 UNDEFINED_NUMBER = -1
 
 class GObject:
@@ -230,6 +232,42 @@ class GDictionary(GObject):
 
     def compile_str(self):
         return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()
+
+class GStream(GObject):
+    """
+    GStream is the Python class for PDF stream object.
+    """
+    def __init__(self):
+        super().__init__()
+        self.dict = GDictionary()
+        self.content = b""
+
+    def set_content(self, c):
+        self.content = c
+
+    def bytes(self):
+        # Flate encoder by zlib
+        encoded_bytes = self.encoded_bytes()
+        # Set /Length in dictionary 
+        length = len(encoded_bytes)
+        self.dict.set(GName("Length"), GNumber(length))
+        # We use FlateDecode filter, that's to say, 
+        # we encode content by using flate encode.
+        # Set /Filter in dictionary
+        self.dict.set(GName("Filter"), GName("FlateDecode"))
+        # Construct result as bytes
+        result = self.dict.compile_bytes() + b"\r\n" # dictionary bytes
+        result += b"stream\r\n" # stream keyword bytes
+        result += encoded_bytes + b"\r\n" # encoded content bytes
+        result += b"\r\n" + b"endstream\r\n"
+        return result
+
+    def encoded_bytes(self):
+        # Flate encoder by zlib
+        return zlib.compress(self.content)
 
     def compile_bytes(self):
         return self.bytes()

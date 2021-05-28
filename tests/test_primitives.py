@@ -2,7 +2,9 @@ import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
+from caprice.primitives import GStream
 from caprice.primitives import UNDEFINED_NUMBER
+import zlib
 
 class TestGNumber(unittest.TestCase):
     def test_str(self):
@@ -195,6 +197,20 @@ class TestGDictionary(unittest.TestCase):
         d.set(GName("Encoding"), GLiteralString("UTF-8"))
         expect = b"<</Font /Arial /GS 3.14 /Encoding (UTF-8)>>"
         self.assertEqual(d.compile_bytes(), expect)
+
+class TestGStream(unittest.TestCase):
+    def test_dict(self):
+        s = GStream()
+        s.set_content(b"Hello, World")
+        s.bytes()
+        self.assertEqual(s.dict.compile_str(), "<</Length 20 /Filter /FlateDecode>>")
+
+    def test_encode(self):
+        s = GStream()
+        s.set_content(b"Hello, World!")
+        encoded_bytes = s.encoded_bytes()
+        decoded_bytes = zlib.decompress(encoded_bytes)
+        self.assertEqual(decoded_bytes, s.content)
 
 if __name__ == '__main__':
     unittest.main()
