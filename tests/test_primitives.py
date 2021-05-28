@@ -228,6 +228,9 @@ class TestGIndirect(unittest.TestCase):
         i.object = d
         expect = b"1 0 obj\r\n<</Key1 /Val1 /Key2 1>>\r\nendobj\r\n"
         self.assertEqual(i.compile_bytes(), expect)
+        # Test exception for object is None
+        i = GIndirect()
+        self.assertRaises(Exception, i.compile_bytes)
 
 if __name__ == '__main__':
     unittest.main()

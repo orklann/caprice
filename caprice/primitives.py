@@ -288,6 +288,8 @@ class GIndirect(GObject):
         self.object = None
     
     def bytes(self):
+        if self.object is None:
+            raise Exception("GIndirect's object is None.")
         result = str.encode("%d %d obj\r\n" % (self.obj_num, self.generation_num))
         result += self.object.compile_bytes()
         if (isinstance(self.object, GStream)):
