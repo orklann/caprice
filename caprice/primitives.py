@@ -199,7 +199,7 @@ class GArray(GObject):
 
     def append(self, val):
         if not isinstance(val, (GBoolean, GHexString, GArray, GDictionary,\
-            GNull, GNumber, GLiteralString, GName)):
+            GNull, GNumber, GLiteralString, GName, GRef)):
             raise TypeError("GArray's append method's input is not invalid: "\
              + str(type(val)))
         self.array.append(val)
@@ -224,7 +224,7 @@ class GDictionary(GObject):
         if not isinstance(key, GName):
             raise TypeError("GDictionary's key must be a GName instance, for set() method.")
         if not isinstance(obj, (GBoolean, GHexString, GArray, GDictionary,\
-            GNull, GNumber, GLiteralString, GName)):
+            GNull, GNumber, GLiteralString, GName, GRef)):
             raise TypeError("GDictionary's `obj` parameter in set method is not invalid: "\
              + str(type(obj)))
         self.dict[key] = obj
