@@ -257,7 +257,7 @@ class GStream(GObject):
         self.dict.set(GName("Length"), GNumber(length))
         
         # We use FlateDecode filter, that's to say, 
-        # we encode content by using flate encode.
+        # we encode content by using flate encoder.
         # Set /Filter in dictionary
         self.dict.set(GName("Filter"), GName("FlateDecode"))
 
