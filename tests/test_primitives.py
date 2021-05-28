@@ -1,8 +1,9 @@
 import unittest
+from unittest.case import expectedFailure
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
-from caprice.primitives import GStream
+from caprice.primitives import GStream, GIndirect
 from caprice.primitives import UNDEFINED_NUMBER
 import zlib
 
@@ -215,6 +216,18 @@ class TestGStream(unittest.TestCase):
         # Tests framework.
         # The test file is: caprice_stream.bin in `PEPTests/pdf`
         # Result: Passing
+
+class TestGIndirect(unittest.TestCase):
+    def test_compile_bytes(self):
+        i = GIndirect()
+        i.obj_num = 1
+        i.generation_num = 0
+        d = GDictionary()
+        d.set(GName("Key1"), GName("Val1"))
+        d.set(GName("Key2"), GNumber(1))
+        i.object = d
+        expect = b"1 0 obj\r\n<</Key1 /Val1 /Key2 1>>\r\nendobj\r\n"
+        self.assertEqual(i.compile_bytes(), expect)
 
 if __name__ == '__main__':
     unittest.main()

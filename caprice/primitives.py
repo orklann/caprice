@@ -275,3 +275,26 @@ class GStream(GObject):
 
     def compile_bytes(self):
         return self.bytes()
+
+class GIndirect(GObject):
+    """
+    GIndirect is the Python class for PDF indirect object.
+    """
+    def __init__(self):
+        super().__init__()
+        self.obj_num = UNDEFINED_NUMBER
+        self.generation_num = UNDEFINED_NUMBER
+        self.offset = UNDEFINED_NUMBER
+        self.object = None
+    
+    def bytes(self):
+        result = str.encode("%d %d obj\r\n" % (self.obj_num, self.generation_num))
+        result += self.object.compile_bytes()
+        if (isinstance(self.object, GStream)):
+            result += b"endobj\r\n"
+        else:
+            result += b"\r\nendobj\r\n"
+        return result
+
+    def compile_bytes(self):
+        return self.bytes()
