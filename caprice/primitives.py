@@ -3,9 +3,6 @@
 Classes represents PDF primitives objects
 """
 
-from unittest import result
-
-
 UNDEFINED_NUMBER = -1
 
 class GObject:
