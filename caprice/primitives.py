@@ -3,6 +3,9 @@
 Classes represents PDF primitives objects
 """
 
+from unittest import result
+
+
 UNDEFINED_NUMBER = -1
 
 class GObject:
@@ -24,9 +27,9 @@ class GNumber(GObject):
     
     def __str__(self):
         if isinstance(self.value, int):
-            return "%d" % self.value
+            return str(self.value)
         elif isinstance(self.value, float):
-            return "%f" % self.value
+            return str(self.value)
         else:
             raise Exception('GNumber.value is invalid, should be either int or float')
 
@@ -180,3 +183,31 @@ class GNull(GObject):
     def compile_bytes(self):
         return self.bytes()
 
+
+class GArray(GObject):
+    """
+    GArray is the Python class for PDF array object
+    """
+    def __init__(self):
+        super().__init__()
+        self.array = []
+
+    def __str__(self):
+        result = "[ "
+        for ele in self.array:
+            result += ele.compile_str()
+            result += " "
+        result += "]"
+        return result
+
+    def append(self, v):
+        self.array.append(v)
+
+    def bytes(self):
+        return str.encode(self.__str__())
+
+    def compile_str(self):
+        return self.__str__()
+
+    def compile_bytes(self):
+        return self.bytes()

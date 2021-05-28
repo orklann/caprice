@@ -1,7 +1,7 @@
 import unittest
 
 from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
-from caprice.primitives import GHexString, GName, GNull
+from caprice.primitives import GHexString, GName, GNull, GArray
 from caprice.primitives import UNDEFINED_NUMBER
 
 
@@ -24,25 +24,25 @@ class TestGNumber(unittest.TestCase):
         n = GNumber(1)
         self.assertEqual(n.__str__(), "1")
         n = GNumber(1.2)
-        self.assertEqual(n.__str__(), "1.200000")
+        self.assertEqual(n.__str__(), "1.2")
 
     def test_bytes(self):
         n = GNumber(1)
         self.assertEqual(n.bytes(), b"1")
         n = GNumber(1.2)
-        self.assertEqual(n.bytes(), b"1.200000")
+        self.assertEqual(n.bytes(), b"1.2")
 
     def test_compile_str(self):
         n = GNumber(1)
         self.assertEqual(n.compile_str(), "1")
         n = GNumber(1.2)
-        self.assertEqual(n.compile_str(), "1.200000")
+        self.assertEqual(n.compile_str(), "1.2")
 
     def test_compile_bytes(self):
         n = GNumber(1)
         self.assertEqual(n.compile_bytes(), b"1")
         n = GNumber(1.2)
-        self.assertEqual(n.compile_bytes(), b"1.200000")
+        self.assertEqual(n.compile_bytes(), b"1.2")
 
 
 class TestGBoolean(unittest.TestCase):
@@ -157,6 +157,25 @@ class TestGNull(unittest.TestCase):
         self.assertEqual(n.obj_num, UNDEFINED_NUMBER)
         n.obj_num = 2
         self.assertEqual(n.obj_num, 2)
+
+class TestGArray(unittest.TestCase):
+    def test_compile_str(self):
+        array = GArray()
+        array.append(GName("Font"))
+        array.append(GNull())
+        array.append(GNumber(3.14))
+        array.append(GBoolean(False))
+        array.append(GLiteralString("Hello"))
+        self.assertEqual(array.compile_str(), "[ /Font null 3.14 false (Hello) ]")
+
+    def test_compile_bytes(self):
+        array = GArray()
+        array.append(GName("Font"))
+        array.append(GNull())
+        array.append(GNumber(3.14))
+        array.append(GBoolean(False))
+        array.append(GLiteralString("Hello"))
+        self.assertEqual(array.compile_bytes(), b"[ /Font null 3.14 false (Hello) ]")
 
 if __name__ == '__main__':
     unittest.main()
