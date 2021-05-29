@@ -2,6 +2,7 @@
 
 import unittest
 from caprice.document import Document
+from caprice.primitives import GIndirect
 
 class TestDocument(unittest.TestCase):
     def test_add_page(self):
@@ -10,3 +11,16 @@ class TestDocument(unittest.TestCase):
         doc.add_page()
         self.assertEqual(len(doc.pages), 2)
         self.assertEqual(p1.doc, doc)
+
+    def test_add_indirect(self):
+        doc = Document()
+        i1 = GIndirect()
+        doc.add_indirect(i1)
+        i2 = GIndirect()
+        doc.add_indirect(i2)
+        keys = doc.indirects_dict.keys()
+        for i, v in enumerate(keys):
+            if i == 0:
+                self.assertEqual(v, "1 0 R")
+            elif i == 1:
+                self.assertEqual(v, "2 0 R")
