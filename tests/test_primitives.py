@@ -3,7 +3,6 @@ from caprice.primitives import GLiteralString, GObject, GNumber, GBoolean
 from caprice.primitives import GHexString, GName, GNull, GArray, GDictionary
 from caprice.primitives import GStream, GIndirect, GRef
 from caprice.primitives import UNDEFINED_NUMBER
-from caprice.document import Document
 from caprice.page import Page
 
 import zlib
@@ -286,14 +285,6 @@ class TestGRef(unittest.TestCase):
         r.set_obj_num(1)
         r.set_generation_num(0)
         self.assertEqual(r.compile_bytes(), b"1 0 R")
-
-class TestDocument(unittest.TestCase):
-    def test_add_page(self):
-        doc = Document()
-        p1 = doc.add_page()
-        doc.add_page()
-        self.assertEqual(len(doc.pages), 2)
-        self.assertEqual(p1.doc, doc)
 
 class TestPage(unittest.TestCase):
     pass
