@@ -13,7 +13,7 @@ class Page:
         self.dict = GDictionary()
         self.__init_dict()
     
-    def set_size(w, h):
+    def set_size(self, w, h):
         self.rect[2] = w
         self.rect[3] = h
 
