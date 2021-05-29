@@ -28,3 +28,4 @@ class Document:
         self.indirect_obj_num_count += 1
         key = indirect.get_ref().compile_str()
         self.indirects_dict[key] = indirect
+        return indirect
