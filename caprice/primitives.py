@@ -341,7 +341,7 @@ class GIndirect(GObject):
         r.set_generation_num(self.generation_num)
         return r
 
-    def get_ref_as_key(self):
+    def get_ref_str(self):
         return self.get_ref().compile_str()
 
 class GRef(GObject):

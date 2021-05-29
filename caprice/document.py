@@ -28,6 +28,6 @@ class Document:
         indirect.set_generation_num(0)
         # Increse tracking object number
         self.indirect_obj_num_count += 1
-        key = indirect.get_ref_as_key()
+        key = indirect.get_ref_str()
         self.indirects_dict[key] = indirect
         return indirect
