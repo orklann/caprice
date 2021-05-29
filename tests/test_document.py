@@ -18,8 +18,7 @@ class TestDocument(unittest.TestCase):
         doc.add_indirect(i1)
         i2 = GIndirect()
         doc.add_indirect(i2)
-        keys = doc.indirects_dict.keys()
-        for i, v in enumerate(keys):
+        for i, v in enumerate(doc.indirects_dict):
             if i == 0:
                 self.assertEqual(v, "1 0 R")
             elif i == 1:
