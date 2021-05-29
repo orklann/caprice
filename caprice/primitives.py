@@ -341,6 +341,9 @@ class GIndirect(GObject):
         r.set_generation_num(self.generation_num)
         return r
 
+    def get_ref_as_key(self):
+        return self.get_ref().compile_str()
+
 class GRef(GObject):
     """GRef is the Python class for PDF ref string. 
     A ref string is like: 1 0 R
