@@ -268,6 +268,13 @@ class TestGIndirect(unittest.TestCase):
         i = GIndirect()
         self.assertRaises(Exception, i.compile_bytes)
 
+    def test_get_ref(self):
+        i = GIndirect()
+        i.set_obj_num(1)
+        i.set_generation_num(0)
+        ref = i.get_ref()
+        self.assertEqual(ref.compile_str(), "1 0 R")
+
 class TestGRef(unittest.TestCase):
     def test_type(self):
         r = GRef()

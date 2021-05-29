@@ -335,6 +335,12 @@ class GIndirect(GObject):
     def compile_bytes(self):
         return self.bytes()
 
+    def get_ref(self):
+        r = GRef()
+        r.set_obj_num(self.obj_num)
+        r.set_generation_num(self.generation_num)
+        return r
+
 class GRef(GObject):
     """GRef is the Python class for PDF ref string. 
     A ref string is like: 1 0 R
