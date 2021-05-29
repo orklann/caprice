@@ -6,7 +6,8 @@ from .primitives import GIndirect
 from .page import Page
 
 class Document:
-    indirect_obj_num_count = 1 # Increase this value after add new GIndirect
+    # Increase this value after adding new GIndirect
+    indirect_obj_num_count = 1
 
     def __init__(self) -> None:
         self.pages = []
