@@ -288,5 +288,8 @@ class TestDocument(unittest.TestCase):
         self.assertEqual(len(doc.pages), 2)
         self.assertEqual(p1.doc, doc)
 
+class TestPage(unittest.TestCase):
+    pass
+
 if __name__ == '__main__':
     unittest.main()
