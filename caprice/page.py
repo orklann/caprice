@@ -1,11 +1,12 @@
 # -*- coding=utf-8 -*-
-"""Page presents a page in PDF.
-"""
 
 from .primitives import GDictionary, GName, GArray
 from .utils import rect_primitive
 
 class Page:
+    """Page presents a page in PDF.
+    """
+
     def __init__(self, doc) -> None:
         # Document for this page
         self.doc = doc
