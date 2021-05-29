@@ -14,10 +14,8 @@ class TestDocument(unittest.TestCase):
 
     def test_add_indirect(self):
         doc = Document()
-        i1 = GIndirect()
-        doc.add_indirect(i1)
-        i2 = GIndirect()
-        doc.add_indirect(i2)
+        i1 = doc.new_indirect()
+        i2 = doc.new_indirect()
         for i, v in enumerate(doc.indirects_dict):
             if i == 0:
                 self.assertEqual(v, "1 0 R")

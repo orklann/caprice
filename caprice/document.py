@@ -18,9 +18,11 @@ class Document:
         self.pages.append(p)
         return p
 
-    def add_indirect(self, indirect: GIndirect):
-        """Add GIndirect to Document, by using increasing object number
+    def new_indirect(self):
+        """Creaat GIndirect and add it to Document, 
+        by using increasing object number
         """
+        indirect = GIndirect()
         # Set the tracking object number
         indirect.set_obj_num(self.indirect_obj_num_count)
         indirect.set_generation_num(0)
