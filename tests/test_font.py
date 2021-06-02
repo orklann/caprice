@@ -8,3 +8,8 @@ class TestFont(unittest.TestCase):
         self.assertEqual(f.standard_font_name, font.Times_Roman)
         f = Font("times_roman.ttf", None, "F1")
         self.assertEqual(f.standard_font_name, None)
+
+    def test_compile_str(self):
+        f = Font(font.Times_Roman, None, "F1")
+        expected = "<</Type /Font /Subtype /Type1 /BaseFont /%s>>" % font.Times_Roman
+        self.assertEqual(f.compile_str(), expected)

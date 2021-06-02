@@ -1,5 +1,7 @@
 # -*- coding=utf-8 -*-
 
+from .primitives import GDictionary, GName
+
 # All 14 Type1 standard fonts
 Times_Roman = "Times-Roman"
 Helvetica = "Helvetica"
@@ -42,3 +44,13 @@ class Font:
             self.standard_font_name = None
         self.doc = doc
         self.tag = new_tag
+
+    def compile_str(self):
+        if self.standard_font_name is not None:
+            self.dict = GDictionary()
+            self.dict.set(GName("Type"), GName("Font"))
+            self.dict.set(GName("Subtype"), GName("Type1"))
+            self.dict.set(GName("BaseFont"), GName(self.standard_font_name))
+            return self.dict.compile_str()
+        else:
+            pass
