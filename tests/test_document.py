@@ -25,5 +25,7 @@ class TestDocument(unittest.TestCase):
 
     def test_add_font(self):
         doc = Document()
-        f = doc.add_font(font.Times_Roman)
+        f1 = doc.add_font(font.Times_Roman)
         self.assertEqual(doc.fonts_dict["F1"].standard_font_name, font.Times_Roman)
+        f2 = doc.add_font(font.Times_Italic)
+        self.assertEqual(doc.fonts_dict["F2"].standard_font_name, font.Times_Italic)
