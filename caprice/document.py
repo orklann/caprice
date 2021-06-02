@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from .primitives import GIndirect
+from .primitives import GIndirect, GDictionary, GName, GRef
 from .page import Page
 from .font import Font
 
@@ -15,6 +15,17 @@ class Document:
         self.pages = []
         self.indirects_dict = {}
         self.fonts_dict = {}
+        self.create_catalog()
+
+    def create_catalog(self):
+        self.catalog = self.new_indirect()
+        dict = GDictionary()
+        dict.set(GName("Type"), GName("Catalog"))
+        rootPagesRef = GRef()
+        rootPagesRef.obj_num = 2
+        rootPagesRef.generation_num = 0
+        dict.set(GName("Pages"), rootPagesRef)
+        self.catalog.set_object(dict)
         
     def add_page(self):
         p = Page(self)
