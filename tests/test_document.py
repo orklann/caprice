@@ -12,6 +12,12 @@ class TestDocument(unittest.TestCase):
         doc.add_page()
         self.assertEqual(len(doc.pages), 2)
         self.assertEqual(p1.doc, doc)
+        kids = doc.root_pages.object.get(GName("Kids"))
+        ref1 = kids.array[0]
+        self.assertEqual(ref1.compile_str(), "3 0 R")
+        p2 = doc.add_page()
+        ref2 = kids.array[1]
+        self.assertEqual(ref2.compile_str(), "4 0 R")
 
     def test_add_indirect(self):
         doc = Document()

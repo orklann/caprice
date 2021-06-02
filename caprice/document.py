@@ -38,6 +38,9 @@ class Document:
     def add_page(self):
         p = Page(self)
         self.pages.append(p)
+        page_ref = p.indirect_obj.get_ref()
+        kids = self.root_pages.object.get(GName("Kids"))
+        kids.append(page_ref)
         return p
 
     def new_indirect(self):
