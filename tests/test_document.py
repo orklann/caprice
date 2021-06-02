@@ -31,3 +31,4 @@ class TestDocument(unittest.TestCase):
         f2 = doc.add_font(font.Times_Italic)
         self.assertEqual(doc.fonts_dict["F2"].standard_font_name, font.Times_Italic)
         self.assertEqual(doc.fonts_dict["F2"].indirect_obj.get_ref_str(), "2 0 R")
+        self.assertEqual(len(doc.indirects_dict), 2)
