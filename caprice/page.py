@@ -32,7 +32,7 @@ class Page:
         # TODO: /Content:
 
     def compile_str(self):
-        return self.dict.compile_str()
+        return self.indirect_obj.compile_str()
 
     def compile_bytes(self):
-        return self.dict.compile_bytes()
+        return self.indirect_obj.compile_bytes()
