@@ -23,7 +23,9 @@ class Page:
     def __init_dict(self):
         # /Type: /Page
         self.dict.set(GName("Type"), GName("Page"))
-        # TODO: /Parent: Pages object
+        # /Parent: Root Pages object ref
+        root_page_ref = self.doc.catalog.object.get(GName("Pages"))
+        self.dict.set(GName("Parent"), root_page_ref)
         # TODO: /Resources:
         # /MediaBox: Hardcoded at the moment
         self.dict.set(GName("MediaBox"), rect_primitive(self.rect))
@@ -32,6 +34,7 @@ class Page:
         # TODO: /Content:
 
     def compile_str(self):
+        self.__init_dict()
         return self.indirect_obj.compile_str()
 
     def compile_bytes(self):
