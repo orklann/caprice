@@ -54,3 +54,6 @@ class Font:
             return self.dict.compile_str()
         else:
             pass
+
+    def compile_bytes(self):
+        return str.encode(self.compile_str())            

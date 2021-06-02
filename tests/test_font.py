@@ -13,3 +13,8 @@ class TestFont(unittest.TestCase):
         f = Font(font.Times_Roman, None, "F1")
         expected = "<</Type /Font /Subtype /Type1 /BaseFont /%s>>" % font.Times_Roman
         self.assertEqual(f.compile_str(), expected)
+
+    def test_compile_bytes(self):
+        f = Font(font.Times_Roman, None, "F1")
+        expected = "<</Type /Font /Subtype /Type1 /BaseFont /%s>>" % font.Times_Roman
+        self.assertEqual(f.compile_bytes(), str.encode(expected))
