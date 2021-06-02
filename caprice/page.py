@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from .primitives import GDictionary, GName, GArray
+from .primitives import GDictionary, GName, GArray, GIndirect
 from .utils import rect_primitive
 
 class Page:
@@ -13,6 +13,8 @@ class Page:
         self.rect = [0, 0, 600, 800]
         self.dict = GDictionary()
         self.__init_dict()
+        self.indirect_obj = doc.new_indirect()
+        self.indirect_obj.set_object(self.dict)
     
     def set_size(self, w, h):
         self.rect[2] = w
