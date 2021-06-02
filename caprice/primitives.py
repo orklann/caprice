@@ -335,6 +335,17 @@ class GIndirect(GObject):
     def compile_bytes(self):
         return self.bytes()
 
+    def compile_str(self):
+        if self.object is None:
+            raise Exception("GIndirect's object is None.")
+        result = "%d %d obj\r\n" % (self.obj_num, self.generation_num)
+        result += self.object.compile_str()
+        if (isinstance(self.object, GStream)):
+            result += "endobj\r\n\r\n"
+        else:
+            result += "\r\nendobj\r\n\r\n"
+        return result
+
     def get_ref(self):
         r = GRef()
         r.set_obj_num(self.obj_num)

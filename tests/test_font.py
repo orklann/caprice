@@ -1,20 +1,24 @@
 import unittest
 from caprice.font import Font
+from caprice.document import Document
 from caprice import font
 
 class TestFont(unittest.TestCase):
     def test_standard_font(self):
-        f = Font(font.Times_Roman, None, "F1")
+        doc = Document()
+        f = Font(font.Times_Roman, doc, "F1")
         self.assertEqual(f.standard_font_name, font.Times_Roman)
-        f = Font("times_roman.ttf", None, "F1")
+        f = Font("times_roman.ttf", doc, "F1")
         self.assertEqual(f.standard_font_name, None)
 
     def test_compile_str(self):
-        f = Font(font.Times_Roman, None, "F1")
-        expected = "<</Type /Font /Subtype /Type1 /BaseFont /%s>>" % font.Times_Roman
+        doc = Document()
+        f = Font(font.Times_Roman, doc, "F1")
+        expected = "1 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
         self.assertEqual(f.compile_str(), expected)
 
     def test_compile_bytes(self):
-        f = Font(font.Times_Roman, None, "F1")
-        expected = "<</Type /Font /Subtype /Type1 /BaseFont /%s>>" % font.Times_Roman
+        doc = Document()
+        f = Font(font.Times_Roman, doc, "F1")
+        expected = "1 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
         self.assertEqual(f.compile_bytes(), str.encode(expected))

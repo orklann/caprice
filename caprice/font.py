@@ -40,6 +40,12 @@ class Font:
     def __init__(self, font_file, doc, new_tag) -> None:
         if (font_file in Standard_Fonts):
             self.standard_font_name = font_file
+            self.dict = GDictionary()
+            self.dict.set(GName("Type"), GName("Font"))
+            self.dict.set(GName("Subtype"), GName("Type1"))
+            self.dict.set(GName("BaseFont"), GName(self.standard_font_name))
+            self.indirect_obj = doc.new_indirect()
+            self.indirect_obj.set_object(self.dict)
         else:
             self.standard_font_name = None
         self.doc = doc
@@ -47,11 +53,7 @@ class Font:
 
     def compile_str(self):
         if self.standard_font_name is not None:
-            self.dict = GDictionary()
-            self.dict.set(GName("Type"), GName("Font"))
-            self.dict.set(GName("Subtype"), GName("Type1"))
-            self.dict.set(GName("BaseFont"), GName(self.standard_font_name))
-            return self.dict.compile_str()
+            return self.indirect_obj.compile_str()
         else:
             # TODO: Handle external fonts for compile_str()
             pass
