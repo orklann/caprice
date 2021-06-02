@@ -53,6 +53,7 @@ class Font:
             self.dict.set(GName("BaseFont"), GName(self.standard_font_name))
             return self.dict.compile_str()
         else:
+            # TODO: Handle external fonts for compile_str()
             pass
 
     def compile_bytes(self):
