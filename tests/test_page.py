@@ -8,4 +8,4 @@ class TestPage(unittest.TestCase):
     def test_indirect_obj(self):
         doc = Document()
         page = Page(doc)
-        self.assertEqual(page.indirect_obj.get_ref_str(), "2 0 R")
+        self.assertEqual(page.indirect_obj.get_ref_str(), "3 0 R")

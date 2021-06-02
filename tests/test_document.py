@@ -24,19 +24,22 @@ class TestDocument(unittest.TestCase):
                 self.assertEqual(v, "2 0 R")
             elif i == 2:
                 self.assertEqual(v, "3 0 R")
+            elif i == 3:
+                self.assertEqual(v, "4 0 R")
 
     def test_add_font(self):
         doc = Document()
         f1 = doc.add_font(font.Times_Roman)
         self.assertEqual(doc.fonts_dict["F1"].standard_font_name, font.Times_Roman)
-        self.assertEqual(doc.fonts_dict["F1"].indirect_obj.get_ref_str(), "2 0 R")
+        self.assertEqual(doc.fonts_dict["F1"].indirect_obj.get_ref_str(), "3 0 R")
         f2 = doc.add_font(font.Times_Italic)
         self.assertEqual(doc.fonts_dict["F2"].standard_font_name, font.Times_Italic)
-        self.assertEqual(doc.fonts_dict["F2"].indirect_obj.get_ref_str(), "3 0 R")
-        self.assertEqual(len(doc.indirects_dict), 3)
+        self.assertEqual(doc.fonts_dict["F2"].indirect_obj.get_ref_str(), "4 0 R")
+        self.assertEqual(len(doc.indirects_dict), 4)
 
     def test_create_catalog(self):
         doc = Document()
         catalog = doc.catalog.object
-        rootPages = catalog.get(GName("Pages"))
-        self.assertEqual(rootPages.compile_str(), "2 0 R")
+        root_pages_ref = catalog.get(GName("Pages"))
+        self.assertEqual(root_pages_ref.compile_str(), "2 0 R")
+        self.assertEqual(doc.root_pages.get_ref_str(), "2 0 R")

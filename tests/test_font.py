@@ -14,11 +14,11 @@ class TestFont(unittest.TestCase):
     def test_compile_str(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")
-        expected = "2 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
+        expected = "3 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
         self.assertEqual(f.compile_str(), expected)
 
     def test_compile_bytes(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")
-        expected = "2 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
+        expected = "3 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
         self.assertEqual(f.compile_bytes(), str.encode(expected))
