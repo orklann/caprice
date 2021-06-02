@@ -18,6 +18,8 @@ class TestDocument(unittest.TestCase):
         p2 = doc.add_page()
         ref2 = kids.array[1]
         self.assertEqual(ref2.compile_str(), "4 0 R")
+        count = doc.root_pages.object.get(GName("Count"))
+        self.assertEqual(count.compile_str(), "3")
 
     def test_add_indirect(self):
         doc = Document()

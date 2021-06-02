@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 
-from .primitives import GIndirect, GDictionary, GName, GRef, GArray
+from .primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
 from .page import Page
 from .font import Font
 
@@ -41,6 +41,8 @@ class Document:
         page_ref = p.indirect_obj.get_ref()
         kids = self.root_pages.object.get(GName("Kids"))
         kids.append(page_ref)
+        count = len(kids.array)
+        self.root_pages.object.set(GName("Count"), GNumber(count))
         return p
 
     def new_indirect(self):
