@@ -327,9 +327,9 @@ class GIndirect(GObject):
         result = str.encode("%d %d obj\r\n" % (self.obj_num, self.generation_num))
         result += self.object.compile_bytes()
         if (isinstance(self.object, GStream)):
-            result += b"endobj\r\n"
+            result += b"endobj\r\n\r\n"
         else:
-            result += b"\r\nendobj\r\n"
+            result += b"\r\nendobj\r\n\r\n"
         return result
 
     def compile_bytes(self):

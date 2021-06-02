@@ -260,7 +260,7 @@ class TestGIndirect(unittest.TestCase):
         d.set(GName("Key1"), GName("Val1"))
         d.set(GName("Key2"), GNumber(1))
         i.set_object(d)
-        expect = b"1 0 obj\r\n<</Key1 /Val1 /Key2 1>>\r\nendobj\r\n"
+        expect = b"1 0 obj\r\n<</Key1 /Val1 /Key2 1>>\r\nendobj\r\n\r\n"
         self.assertEqual(i.compile_bytes(), expect)
         # Test exception for object is None
         i = GIndirect()
