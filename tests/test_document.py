@@ -3,6 +3,7 @@
 import unittest
 from caprice.document import Document
 from caprice.primitives import GIndirect
+from caprice import font
 
 class TestDocument(unittest.TestCase):
     def test_add_page(self):
@@ -21,3 +22,8 @@ class TestDocument(unittest.TestCase):
                 self.assertEqual(v, "1 0 R")
             elif i == 1:
                 self.assertEqual(v, "2 0 R")
+
+    def test_add_font(self):
+        doc = Document()
+        f = doc.add_font(font.Times_Roman)
+        self.assertEqual(doc.fonts_dict["F1"].standard_font_name, font.Times_Roman)

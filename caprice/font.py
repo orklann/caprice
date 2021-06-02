@@ -35,8 +35,10 @@ Standard_Fonts = [
 ]
 
 class Font:
-    def __init__(self, font_file) -> None:
+    def __init__(self, font_file, doc, new_tag) -> None:
         if (font_file in Standard_Fonts):
             self.standard_font_name = font_file
         else:
             self.standard_font_name = None
+        self.doc = doc
+        self.tag = new_tag
