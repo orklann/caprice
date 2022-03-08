@@ -1,5 +1,3 @@
-# -*- coding=utf-8 -*-
-
 import unittest
 from caprice.document import Document
 from caprice.primitives import GIndirect, GName

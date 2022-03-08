@@ -1,5 +1,3 @@
-# -*- coding=utf-8 -*-
-
 from .primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
 from .page import Page
 from .font import Font

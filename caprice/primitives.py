@@ -1,4 +1,3 @@
-# -*- coding=utf-8 -*-
 """
 Classes represents PDF primitives objects
 """

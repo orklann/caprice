@@ -1,5 +1,3 @@
-# -*- coding=utf-8 -*-
-
 from .primitives import GArray, GNumber
 
 def rect_primitive(rect):

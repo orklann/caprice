@@ -1,5 +1,3 @@
-# -*- coding=utf-8 -*-
-
 from .primitives import GDictionary, GName, GArray, GIndirect
 from .utils import rect_primitive
 

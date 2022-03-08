@@ -1,5 +1,3 @@
-# -*- coding=utf-8 -*-
-
 from .primitives import GDictionary, GName
 
 # All 14 Type1 standard fonts
