@@ -4,9 +4,12 @@
 
 [![Run Tests](https://github.com/orklann/caprice/actions/workflows/main.yml/badge.svg)](https://github.com/orklann/caprice/actions/workflows/main.yml)  
 
+Caprice
+=======
 **Caprice** is a robust Python library for generating PDF.
 
-### How to run unit tests
+How to run unit tests
+---------------------
 ```
 python -m unittest
 ```
