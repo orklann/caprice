@@ -9,7 +9,7 @@ class Document:
     indirect_obj_num_count = 1
     font_reference_count = 1
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.pages = []
         self.indirects_dict = {}
         self.fonts_dict = {}
