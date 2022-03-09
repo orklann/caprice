@@ -5,7 +5,7 @@ class Page:
     """Page presents a page in PDF.
     """
 
-    def __init__(self, doc) -> None:
+    def __init__(self, doc):
         # Document for this page
         self.doc = doc
         self.rect = [0, 0, 600, 800]

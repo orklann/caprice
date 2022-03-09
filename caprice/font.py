@@ -35,7 +35,7 @@ Standard_Fonts = [
 ]
 
 class Font:
-    def __init__(self, font_file, doc, new_tag) -> None:
+    def __init__(self, font_file, doc, new_tag):
         if (font_file in Standard_Fonts):
             self.standard_font_name = font_file
             self.dict = GDictionary()
