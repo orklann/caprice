@@ -39,6 +39,7 @@ class Page:
         resources = self.dict.get(GName("Resources"))
         font_dict = resources.get(GName("Font"))
         font_dict.set(GName(font.tag), font.indirect_obj.get_ref())
+        return font
 
     def compile_str(self):
         self.__init_dict()
