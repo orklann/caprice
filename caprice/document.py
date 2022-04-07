@@ -66,3 +66,4 @@ class Document:
         new_tag = self.new_font_tag()
         f = Font(font_file, self, new_tag)
         self.fonts_dict[new_tag] = f
+        return f

@@ -24,12 +24,21 @@ class Page:
         # /Parent: Root Pages object ref
         root_page_ref = self.doc.catalog.object.get(GName("Pages"))
         self.dict.set(GName("Parent"), root_page_ref)
-        # TODO: /Resources:
+        # /Resources:
+        resources = GDictionary()
+        resources.set(GName("Font"), GDictionary())
+        self.dict.set(GName("Resources"), resources)
         # /MediaBox: Hardcoded at the moment
         self.dict.set(GName("MediaBox"), rect_primitive(self.rect))
         # /CropBox: Hardcoded at the moment
         self.dict.set(GName("CropBox"), rect_primitive(self.rect))
         # TODO: /Content:
+
+    def add_font(self, font_file):
+        font = self.doc.add_font(font_file)
+        resources = self.dict.get(GName("Resources"))
+        font_dict = resources.get(GName("Font"))
+        font_dict.set(GName(font.tag), font.indirect_obj.get_ref())
 
     def compile_str(self):
         self.__init_dict()
