@@ -40,6 +40,23 @@ class Page:
         """
         self.dict.set(GName("Contents"), content_obj.get_ref())
 
+    def add_sample_content(self):
+        """This is a method for demo purpose, to add sample content to page.
+        Consider remove it afterwards.
+        """
+        content_obj = self.doc.new_indirect()
+        content = GStream()
+        content_str = """
+          BT
+            /F1 18 Tf
+            0 0 Td
+            (Hello World) Tj
+          ET
+        """
+        content.set_content(content_str)
+        content_obj.indirect_obj = content
+        self.set_content(content_obj)
+
     def add_font(self, font_file):
         font = self.doc.add_font(font_file)
         resources = self.dict.get(GName("Resources"))
