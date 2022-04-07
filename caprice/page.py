@@ -32,7 +32,13 @@ class Page:
         self.dict.set(GName("MediaBox"), rect_primitive(self.rect))
         # /CropBox: Hardcoded at the moment
         self.dict.set(GName("CropBox"), rect_primitive(self.rect))
-        # TODO: /Content:
+
+    def set_content(self, content_obj):
+        """Set value of /Contents in page dictionary.
+        content_obj is an indirect object, it's an instance of GIndirect class.
+        The content of content_obj is an stream object.
+        """
+        self.dict.set(GName("Contents"), content_obj.get_ref())
 
     def add_font(self, font_file):
         font = self.doc.add_font(font_file)
