@@ -21,3 +21,11 @@ class TestPage(unittest.TestCase):
         font_dict = resource.get(GName("Font"))
         expected = "<</F1 4 0 R /F2 5 0 R>>"
         self.assertEqual(font_dict.compile_str(), expected)
+
+    def test_add_sample_content(self):
+        doc = Document()
+        page = Page(doc)
+        page.add_font(font.Times_Roman)
+        page.add_sample_content()
+        contents = page.dict.get(GName("Contents"))
+        self.assertEqual(contents.compile_str(), "5 0 R")

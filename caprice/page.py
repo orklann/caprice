@@ -1,4 +1,4 @@
-from .primitives import GDictionary, GName, GArray, GIndirect
+from .primitives import GDictionary, GName, GArray, GIndirect, GStream
 from .utils import rect_primitive
 
 class Page:
