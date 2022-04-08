@@ -8,7 +8,8 @@ class Page:
     def __init__(self, doc):
         # Document for this page
         self.doc = doc
-        self.rect = [0, 0, 600, 800]
+        #self.rect = [0, 0, 600, 800]
+        self.rect = [0, 0, 300, 144]
         self.dict = GDictionary()
         self.__init_dict()
         self.indirect_obj = doc.new_indirect()
