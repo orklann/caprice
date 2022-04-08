@@ -321,6 +321,15 @@ class GIndirect(GObject):
         self.object = obj
 
     def bytes(self):
+        result = bytearray()
+        if self.object is None:
+            raise Exception("GIndirect's object is None.")
+        elif isinstance(self.object, GStream):
+            line = "%d %d obj\r\n" % (self.obj_num, self.generation_num)
+            result.extend(line.encode())
+            result.extend(self.object.compile_bytes())
+            result.extend(b"endobj\r\n\r\n")
+            return result
         return str.encode(self.compile_str())
 
     def compile_bytes(self):

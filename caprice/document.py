@@ -86,23 +86,31 @@ class Document:
         data.extend(objects_data)
         # xref table
         offset = len(data)
-        start_xref = offset
+        start_xref_offset = offset
         xref_data = self.build_xref()
         data.extend(xref_data)
+        # trailer dictionary
+        trailer_data = self.build_trailer()
+        data.extend(trailer_data)
+        # startxref
+        start_xref_data = self.build_start_xref(start_xref_offset)
+        data.extend(start_xref_data)
+        # %%EOF
+        data.extend(b'%%EOF')
+        return data
 
     def build_objects(self, offset):
         objects_data = bytearray()
         for key in sorted(self.indirects_dict):
             indirect = self.indirects_dict[key]
             indirect.offset = offset
-
             object_data = indirect.compile_bytes()
             objects_data.extend(object_data)
             offset += len(object_data)
 
             # Add two line feeds
             two_line_feeds = (LINE_FEED + LINE_FEED).encode()
-            objects.data.extend(two_line_feeds)
+            objects_data.extend(two_line_feeds)
             offset += len(two_line_feeds)
         return objects_data
 
@@ -116,7 +124,7 @@ class Document:
         xref_data.extend(header.encode())
         # Object 0
         line = "0000000000 65535 f %s" % END_OF_LINE
-        xref_data.extend(lien.encode())
+        xref_data.extend(line.encode())
         # Other objects
         for key in sorted(self.indirects_dict):
             indirect = self.indirects_dict[key]
@@ -125,3 +133,29 @@ class Document:
             line = "%s 00000 n %s" % (padding_offset, END_OF_LINE)
             xref_data.extend(line.encode())
         return xref_data
+
+    def build_trailer(self):
+        trailer_data = bytearray()
+        # trailer keyword
+        trailer_data.extend(b'trailer\n')
+        # The start of dictionary
+        trailer_data.extend(b'    <<')
+        # /Root 
+        trailer_data.extend(b'/Root 1 0 R\n')
+        # /Size
+        objects_count = len(self.indirects_dict)
+        size_line = "/Size %d\n" % objects_count
+        trailer_data.extend(size_line.encode())
+        # The end of dictionary
+        trailer_data.extend(b'    >>\n')
+        return trailer_data
+
+    def build_start_xref(self, start_xref_offset):
+        start_xref_data = bytearray()
+        # startxref keyword
+        start_xref_data.extend(b'startxref\n')
+        # startxref offset
+        start_xref_data.extend(str(start_xref_offset).encode())
+        # line feed
+        start_xref_data.extend(LINE_FEED.encode())
+        return start_xref_data

@@ -54,7 +54,7 @@ class Page:
           ET
         """
         content.set_content(content_str)
-        content_obj.indirect_obj = content
+        content_obj.object = content
         self.set_content(content_obj)
 
     def add_font(self, font_file):
