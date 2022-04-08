@@ -149,7 +149,7 @@ class Document:
         trailer_data.extend(b'/Root 1 0 R\n')
         # /Size
         objects_count = len(self.indirects_dict) + 1
-        size_line = "/Size %d\n" % objects_count
+        size_line = "      /Size %d\n" % objects_count
         trailer_data.extend(size_line.encode())
         # The end of dictionary
         trailer_data.extend(b'    >>\n')
