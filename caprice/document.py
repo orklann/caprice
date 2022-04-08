@@ -1,6 +1,7 @@
 from .primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
 from .page import Page
 from .font import Font
+from .utils import padding_10_xref
 
 PDF_HEADER = "%PDF-1.5\n%Produced by Caprice"
 LINE_FEED = "\n"
@@ -83,6 +84,11 @@ class Document:
         offset = len(data)
         objects_data = self.build_objects(offset)
         data.extend(objects_data)
+        # xref table
+        offset = len(data)
+        start_xref = offset
+        xref_data = self.build_xref()
+        data.extend(xref_data)
 
     def build_objects(self, offset):
         objects_data = bytearray()
@@ -100,3 +106,22 @@ class Document:
             offset += len(two_line_feeds)
         return objects_data
 
+    def build_xref(self):
+        xref_data = bytearray()
+        # xref keyword
+        xref_data.extend(b'xref\n')
+        # First section header
+        objects_count = len(self.indirects_dict)
+        header = "0 %d\n" % objects_count
+        xref_data.extend(header.encode())
+        # Object 0
+        line = "0000000000 65535 f %s" % END_OF_LINE
+        xref_data.extend(lien.encode())
+        # Other objects
+        for key in sorted(self.indirects_dict):
+            indirect = self.indirects_dict[key]
+            offset = indirect.offset
+            padding_offset = padding_10_xref(offset)
+            line = "%s 00000 n %s" % (padding_offset, END_OF_LINE)
+            xref_data.extend(line.encode())
+        return xref_data

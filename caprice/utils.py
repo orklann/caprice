@@ -13,3 +13,8 @@ def rect_primitive(rect):
     rect.append(GNumber(w))
     rect.append(GNumber(h))
     return rect
+
+def padding_10_xref(number):
+    string = str(number)
+    repeats = 10 - len(string)
+    return "0" * repeats + string
