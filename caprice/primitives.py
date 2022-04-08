@@ -325,6 +325,8 @@ class GIndirect(GObject):
         if self.object is None:
             raise Exception("GIndirect's object is None.")
         elif isinstance(self.object, GStream):
+            # Since GStream does not have compile_str() method, we call it's 
+            # compile_bytes() instead. And handle GStream here.
             line = "%d %d obj\r\n" % (self.obj_num, self.generation_num)
             result.extend(line.encode())
             result.extend(self.object.compile_bytes())
