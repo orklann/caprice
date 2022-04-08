@@ -50,19 +50,3 @@ class TestDocument(unittest.TestCase):
         root_pages_ref = catalog.get(GName("Pages"))
         self.assertEqual(root_pages_ref.compile_str(), "2 0 R")
         self.assertEqual(doc.root_pages.get_ref_str(), "2 0 R")
-
-    def test_build_pdf(self):
-        doc = Document()
-        page = doc.add_page()
-        page.add_font(font.Times_Roman)
-        page.add_sample_content()
-        data = doc.build_pdf()
-    
-    def test_save(self):
-        doc = Document()
-        page = doc.add_page()
-        page.add_font(font.Times_Roman)
-        page.add_sample_content()
-        home = os.path.expanduser("~")
-        filename = os.path.join(home, "sample.pdf")
-        doc.save(filename)
