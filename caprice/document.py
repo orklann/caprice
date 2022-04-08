@@ -124,7 +124,7 @@ class Document:
         # xref keyword
         xref_data.extend(b'xref\n')
         # First section header
-        objects_count = len(self.indirects_dict)
+        objects_count = len(self.indirects_dict) + 1
         header = "0 %d\n" % objects_count
         xref_data.extend(header.encode())
         # Object 0
@@ -148,7 +148,7 @@ class Document:
         # /Root 
         trailer_data.extend(b'/Root 1 0 R\n')
         # /Size
-        objects_count = len(self.indirects_dict)
+        objects_count = len(self.indirects_dict) + 1
         size_line = "/Size %d\n" % objects_count
         trailer_data.extend(size_line.encode())
         # The end of dictionary
