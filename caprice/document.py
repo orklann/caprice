@@ -2,6 +2,11 @@ from .primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
 from .page import Page
 from .font import Font
 
+PDF_HEADER = "%PDF-1.5\n%Produced by Caprice"
+LINE_FEED = "\n"
+CARRIAGE_RETURN = "\r"
+END_OF_LINE = "\r\n"
+
 class Document:
     """Document presents a PDF file
     """
@@ -67,3 +72,31 @@ class Document:
         f = Font(font_file, self, new_tag)
         self.fonts_dict[new_tag] = f
         return f
+    
+    def build_pdf(self):
+        data = bytearray()
+        offset = 0
+        # PDF HEADER
+        header = (PDF_HEADER + LINE_FEED + LINE_FEED).encode()
+        data.extend(header)
+        # Indirect objects
+        offset = len(data)
+        objects_data = self.build_objects(offset)
+        data.extend(objects_data)
+
+    def build_objects(self, offset):
+        objects_data = bytearray()
+        for key in sorted(self.indirects_dict):
+            indirect = self.indirects_dict[key]
+            indirect.offset = offset
+
+            object_data = indirect.compile_bytes()
+            objects_data.extend(object_data)
+            offset += len(object_data)
+
+            # Add two line feeds
+            two_line_feeds = (LINE_FEED + LINE_FEED).encode()
+            objects.data.extend(two_line_feeds)
+            offset += len(two_line_feeds)
+        return objects_data
+
