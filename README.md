@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/orklann/caprice/blob/e30411bc362053a75b2a811dd041250ed0d6882e/artwork/Caprice@0.5x.png" width=128 height=128 />
+  <img src="https://github.com/orklann/caprice/blob/87a3b270c7c8a4df590cb813ac2a45649c3dbbc3/artwork/Caprice_new.png" width=128 height=128 />
 </p>
 
 [![Run Tests](https://github.com/orklann/caprice/actions/workflows/main.yml/badge.svg)](https://github.com/orklann/caprice/actions/workflows/main.yml)  
