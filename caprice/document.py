@@ -74,6 +74,11 @@ class Document:
         self.fonts_dict[new_tag] = f
         return f
     
+    def save(self, filename):
+        buffer = self.build_pdf()
+        with open(filename, "wb") as file:
+            file.write(buffer)
+
     def build_pdf(self):
         data = bytearray()
         offset = 0

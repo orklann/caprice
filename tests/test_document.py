@@ -2,6 +2,7 @@ import unittest
 from caprice.document import Document
 from caprice.primitives import GIndirect, GName
 from caprice import font
+import os
 
 class TestDocument(unittest.TestCase):
     def test_add_page(self):
@@ -56,4 +57,12 @@ class TestDocument(unittest.TestCase):
         page.add_font(font.Times_Roman)
         page.add_sample_content()
         data = doc.build_pdf()
-        print(data)
+    
+    def test_save(self):
+        doc = Document()
+        page = doc.add_page()
+        page.add_font(font.Times_Roman)
+        page.add_sample_content()
+        home = os.path.expanduser("~")
+        filename = os.path.join(home, "sample.pdf")
+        doc.save(filename)
