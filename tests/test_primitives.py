@@ -184,6 +184,12 @@ class TestGDictionary(unittest.TestCase):
         self.assertRaises(TypeError, d.set, GHexString("key"), GName("value"))
         self.assertRaises(TypeError, d.set, GName("key"), 1)
 
+    def test_key_hashable(self):
+        d = GDictionary()
+        d.set(GName("Font"), GName("Arial"))
+        d.set(GName("Font"), GName("Mono Andale"))
+        self.assertEqual(len(d.dict), 1)
+
     def test_key_value(self):
         d = GDictionary()
         d.set(GName("Font"), GName("Arial"))
