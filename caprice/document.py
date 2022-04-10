@@ -42,6 +42,9 @@ class Document:
         self.root_pages.set_object(dict)
         
     def add_page(self):
+        """Add a new page to document, and there is an alias new_page to 
+        do the same thing.
+        """
         p = Page(self)
         self.pages.append(p)
         page_ref = p.indirect_obj.get_ref()
