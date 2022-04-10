@@ -1,7 +1,7 @@
 # Make it works to import parent pacakage
-# To run: python save_pdf_sample.py
+# To run: python examples/save_pdf_sample.py
 import sys
-sys.path.insert(0,'..')
+sys.path.insert(0, '.')
 from caprice.document import Document
 from caprice import font
 import os
