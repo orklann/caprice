@@ -36,7 +36,7 @@ class TestPage(unittest.TestCase):
         expected = "BT\n/F1 12 Tf\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
         self.assertEqual(page.content, expected)
         
-        # Test 2
+        # Test 2, without explictly setting a font
         doc = Document()
         page = doc.add_page()
         text = "Hello, World!"
@@ -44,7 +44,7 @@ class TestPage(unittest.TestCase):
         height = page.rect[3]
         flipped_y = height - 0
         y = flipped_y
-        expected = "BT\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
+        expected = "BT\n/F1 12 Tf\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
         self.assertEqual(page.content, expected)
         
         

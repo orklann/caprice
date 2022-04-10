@@ -1,5 +1,6 @@
 from .primitives import GDictionary, GName, GArray, GIndirect, GStream
 from .utils import rect_primitive
+from . import font
 
 class Page:
     """Page presents a page in PDF.
@@ -66,12 +67,12 @@ class Page:
             height = self.rect[3]
             flipped_y = height - y
             y = flipped_y
-        if self.current_font is not None:
-            text_operators = "BT\n/%s %d Tf\n%d %d Td\n(%s) Tj\nET\n" % \
+        if self.current_font is None:
+            # If current font is None, we set it to Times Romans by default
+            font1 = self.add_font(font.Times_Roman)
+            self.use_font(font1)
+        text_operators = "BT\n/%s %d Tf\n%d %d Td\n(%s) Tj\nET\n" % \
                     (self.current_font.tag, self.current_font_size, x, y, text)
-        else:
-            # If current font is None, we skip drawing text
-            text_operators = ""
         self.content += text_operators
 
     def compile_str(self):
