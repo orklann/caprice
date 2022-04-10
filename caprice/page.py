@@ -8,8 +8,8 @@ class Page:
     def __init__(self, doc):
         # Document for this page
         self.doc = doc
-        #self.rect = [0, 0, 600, 800]
         self.rect = [0, 0, 300, 144]
+        self.content = ""
         self.dict = GDictionary()
         self.__init_dict()
         self.indirect_obj = doc.new_indirect()
@@ -41,21 +41,12 @@ class Page:
         """
         self.dict.set(GName("Contents"), content_obj.get_ref())
 
-    def add_sample_content(self):
-        """This is a method for demo purpose, to add sample content to page.
-        Consider remove it afterwards.
-        """
+    def update_content(self):
         content_obj = self.doc.new_indirect()
-        content = GStream()
-        content_str = """
-          BT
-            /F1 18 Tf
-            0 0 Td
-            (Hello World) Tj
-          ET
-        """
-        content.set_content(content_str)
-        content_obj.object = content
+        content_stream = GStream()
+        content = self.content
+        content_stream.set_content(content)
+        content_obj.object = content_stream
         self.set_content(content_obj)
 
     def add_font(self, font_file):
@@ -64,6 +55,10 @@ class Page:
         font_dict = resources.get(GName("Font"))
         font_dict.set(GName(font.tag), font.indirect_obj.get_ref())
         return font
+
+    def draw_text(self, x, y, text, bottom_left=False):
+        text_operators = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n" % (x, y, text)
+        self.content += text_operators
 
     def compile_str(self):
         self.__init_dict()

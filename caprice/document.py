@@ -80,6 +80,10 @@ class Document:
             file.write(buffer)
 
     def build_pdf(self):
+        # Before build pdf, let's update all pages content
+        for page in self.pages:
+            page.update_content()
+        # Let's build pdf
         data = bytearray()
         offset = 0
         # PDF HEADER

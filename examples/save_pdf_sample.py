@@ -10,7 +10,7 @@ def save_pdf():
     doc = Document()
     page = doc.add_page()
     page.add_font(font.Times_Roman)
-    page.add_sample_content()
+    page.draw_text(0, 0, "Hello World!")
     home = os.path.expanduser("~")
     filename = os.path.join(home, "sample.pdf")
     doc.save(filename)
