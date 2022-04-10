@@ -62,6 +62,9 @@ class Page:
     def use_font(self, font):
         self.current_font = font
 
+    def set_font_size(self, size):
+        self.current_font_size = size
+
     def draw_text(self, x, y, text, bottom_left=False):
         if not bottom_left:
             height = self.rect[3]
