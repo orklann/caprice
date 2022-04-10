@@ -9,9 +9,12 @@ import os
 def save_pdf():
     doc = Document()
     page = doc.add_page()
-    page.add_font(font.Times_Roman)
+    font1 = page.add_font(font.Times_Roman)
+    page.use_font(font1)
     page.draw_text(0, 14, "Hello World!")
     page.draw_text(0, 0, "Hello, World again!", bottom_left=True)
+    page.use_font(None)
+    page.draw_text(0, 50, "Text without explict font")
     home = os.path.expanduser("~")
     filename = os.path.join(home, "sample.pdf")
     doc.save(filename)

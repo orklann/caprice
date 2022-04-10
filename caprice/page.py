@@ -10,6 +10,8 @@ class Page:
         self.doc = doc
         self.rect = [0, 0, 300, 144]
         self.content = ""
+        self.current_font = None
+        self.current_font_size = 12
         self.dict = GDictionary()
         self.__init_dict()
         self.indirect_obj = doc.new_indirect()
@@ -56,12 +58,20 @@ class Page:
         font_dict.set(GName(font.tag), font.indirect_obj.get_ref())
         return font
 
+    def use_font(self, font):
+        self.current_font = font
+
     def draw_text(self, x, y, text, bottom_left=False):
         if not bottom_left:
             height = self.rect[3]
             flipped_y = height - y
             y = flipped_y
-        text_operators = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n" % (x, y, text)
+        if self.current_font is not None:
+            text_operators = "BT\n/%s %d Tf\n%d %d Td\n(%s) Tj\nET\n" % \
+                    (self.current_font.tag, self.current_font_size, x, y, text)
+        else:
+            text_operators = "BT\n%d %d Td\n(%s) Tj\nET\n" % \
+                    (x, y, text)
         self.content += text_operators
 
     def compile_str(self):

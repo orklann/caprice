@@ -23,15 +23,29 @@ class TestPage(unittest.TestCase):
         self.assertEqual(font_dict.compile_str(), expected)
 
     def test_draw_text(self):
+        # Test 1
         doc = Document()
         page = doc.add_page()
-        page.add_font(font.Times_Roman)
+        font1 = page.add_font(font.Times_Roman)
+        page.use_font(font1)
         text = "Hello, World!"
         page.draw_text(0, 0, text)
-
-        # Test data
         height = page.rect[3]
         flipped_y = height - 0
         y = flipped_y
-        expected = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
+        expected = "BT\n/F1 12 Tf\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
         self.assertEqual(page.content, expected)
+        
+        # Test 2
+        doc = Document()
+        page = doc.add_page()
+        text = "Hello, World!"
+        page.draw_text(0, 0, text)
+        height = page.rect[3]
+        flipped_y = height - 0
+        y = flipped_y
+        expected = "BT\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
+        self.assertEqual(page.content, expected)
+        
+        
+
