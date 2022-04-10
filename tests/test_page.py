@@ -21,3 +21,17 @@ class TestPage(unittest.TestCase):
         font_dict = resource.get(GName("Font"))
         expected = "<</F1 4 0 R /F2 5 0 R>>"
         self.assertEqual(font_dict.compile_str(), expected)
+
+    def test_draw_text(self):
+        doc = Document()
+        page = doc.add_page()
+        page.add_font(font.Times_Roman)
+        text = "Hello, World!"
+        page.draw_text(0, 0, text)
+
+        # Test data
+        height = page.rect[3]
+        flipped_y = height - 0
+        y = flipped_y
+        expected = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n" % (0, y, text)
+        self.assertEqual(page.content, expected)
