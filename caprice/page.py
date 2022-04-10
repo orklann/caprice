@@ -70,8 +70,8 @@ class Page:
             text_operators = "BT\n/%s %d Tf\n%d %d Td\n(%s) Tj\nET\n" % \
                     (self.current_font.tag, self.current_font_size, x, y, text)
         else:
-            text_operators = "BT\n%d %d Td\n(%s) Tj\nET\n" % \
-                    (x, y, text)
+            # If current font is None, we skip drawing text
+            text_operators = ""
         self.content += text_operators
 
     def compile_str(self):
