@@ -57,6 +57,10 @@ class Page:
         return font
 
     def draw_text(self, x, y, text, bottom_left=False):
+        if not bottom_left:
+            height = self.rect[3]
+            flipped_y = height - y
+            y = flipped_y
         text_operators = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n" % (x, y, text)
         self.content += text_operators
 
