@@ -5,6 +5,21 @@ from caprice import font
 import os
 
 class TestDocument(unittest.TestCase):
+    def test_new_page(self):
+        doc = Document()
+        p1 = doc.new_page()
+        doc.new_page()
+        self.assertEqual(len(doc.pages), 2)
+        self.assertEqual(p1.doc, doc)
+        kids = doc.root_pages.object.get(GName("Kids"))
+        ref1 = kids.array[0]
+        self.assertEqual(ref1.compile_str(), "3 0 R")
+        p2 = doc.new_page()
+        ref2 = kids.array[1]
+        self.assertEqual(ref2.compile_str(), "4 0 R")
+        count = doc.root_pages.object.get(GName("Count"))
+        self.assertEqual(count.compile_str(), "3")
+
     def test_add_page(self):
         doc = Document()
         p1 = doc.add_page()

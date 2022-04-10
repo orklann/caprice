@@ -21,6 +21,8 @@ class Document:
         self.fonts_dict = {}
         self.create_catalog()
         self.create_root_pages()
+        # Alias new_page to add_page
+        self.new_page = self.add_page
 
     def create_catalog(self):
         self.catalog = self.new_indirect()
