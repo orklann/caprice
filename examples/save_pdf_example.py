@@ -13,7 +13,7 @@ def save_pdf():
     page.draw_text(0, 50, "Text without explictly using a font!")
     font1 = page.add_font(font.Times_Roman)
     page.use_font(font1)
-    page.set_font_size(18)
+    page.set_font_size(12)
     page.draw_text(0, 14, "Hello World!")
     page.draw_text(0, 0, "Hello, World again!", bottom_left=True)
     home = os.path.expanduser("~")
