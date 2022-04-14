@@ -5,4 +5,4 @@ HEAD
 
 0.1.2
 --------
-- Initail release
+- Initial release
