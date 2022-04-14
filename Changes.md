@@ -1,6 +1,6 @@
 # Caprice Chnages
 
-HEAD
+Info
 --------
 
 0.1.2
