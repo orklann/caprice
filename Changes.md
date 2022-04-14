@@ -1,4 +1,4 @@
-# Caprice Chnages
+# Caprice Changes
 
 Info
 --------
