@@ -1,3 +1,4 @@
+import os
 from .primitives import GArray, GNumber
 
 def rect_primitive(rect):
@@ -18,3 +19,9 @@ def padding_10_xref(number):
     string = str(number)
     repeats = 10 - len(string)
     return "0" * repeats + string
+
+def join_paths(*args):
+    path = ""
+    for comp in args:
+        path = os.path.join(path, comp)
+    return path
