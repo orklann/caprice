@@ -9,7 +9,7 @@ class GlyphList:
     * https://github.com/adobe-type-tools/agl-specification
     """
     def __new__(cls):
-        """Singleton"""
+        """Make this GlyphList singleton"""
         it = cls.__dict__.get("__it__")
         if it is not None:
             return it
