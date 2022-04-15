@@ -1,7 +1,5 @@
 import config
 
-glyph_list = None
-
 class GlyphList:
     """Mapping from glyph name to unicode, and unicode to glyph name for the
     Adobe Glyph List.
@@ -10,8 +8,15 @@ class GlyphList:
     * https://github.com/adobe-type-tools/agl-aglfn
     * https://github.com/adobe-type-tools/agl-specification
     """
-    def __init__(self):
+    def __new__(cls):
+        """Singleton"""
+        it = cls.__dict__.get("__it__")
+        if it is not None:
+            return it
+        cls.__it__ = it = object.__new__(cls)
+        it.init()
+        return it
+
+    def init(self):
         pass
 
-# Single instance of GlyphList
-glyph_list = GlyphList()
