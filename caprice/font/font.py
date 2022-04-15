@@ -1,4 +1,4 @@
-from .primitives import GDictionary, GName
+from ..primitives import GDictionary, GName
 
 # All 14 Type1 standard fonts
 Times_Roman = "Times-Roman"
