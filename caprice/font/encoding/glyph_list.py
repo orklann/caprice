@@ -28,8 +28,8 @@ class GlyphList:
           This maps a glyph name to one or more UTF-8 characters.
 
         * Unicode to name mapping
-          This maps UTF-8 character to a glyph name, this mapping is not one-to-one,
-          It just returns the this glyph name which matches.
+          This maps UTF-8 character to a glyph name, this mapping is not 
+          one-to-one, it just returns the first glyph name which matches.
         """
         name_to_unicode = {}
         unicode_to_name = {}
