@@ -1,7 +1,7 @@
-from .primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
-from .page import Page
-from .font import Font
-from .utils import padding_10_xref
+from primitives import GIndirect, GDictionary, GName, GRef, GArray, GNumber
+from page import Page
+from font import Font
+from utils import padding_10_xref
 
 PDF_HEADER = "%PDF-1.5\n%Produced by Caprice"
 LINE_FEED = "\n"

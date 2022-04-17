@@ -1,4 +1,5 @@
 import config
+import utils
 
 class GlyphList:
     """Mapping from glyph name to unicode, and unicode to glyph name for the
@@ -23,7 +24,19 @@ class GlyphList:
         return it
 
     def init(self):
-        pass
+        self.standard_name_to_unicode = None
+        self.standard_unicode_to_name = None
+        self.zapf_name_to_unicode = None
+        self.zapf_unicode_to_name = None
+
+    def load(self):
+        """Load two kinds of Adobe glyph list files as mappings"""
+        glyph_list_path = utils.join_paths(config.data_dir, "caprice", "encoding", "glyphlist.txt")
+        zapf_glyph_list_path = utils.join_paths(config.data_dir, "caprice", "encoding", "zapfdingbats.txt")
+        self.standard_name_to_unicode, self.standard_unicode_to_name = \
+            self.load_file(glyph_list_path)
+        self.zapf_name_to_unicode, self.zapf_unicode_to_name = \
+            self.load_file(zapf_glyph_list_path)
 
     def load_file(self, file):
         """Load an Adobe glyph list form external file, and return two mappings.
