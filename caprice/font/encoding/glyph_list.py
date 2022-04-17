@@ -1,5 +1,5 @@
-import config
-import utils
+from ... import config
+from ... import utils
 
 class GlyphList:
     """Mapping from glyph name to unicode, and unicode to glyph name for the

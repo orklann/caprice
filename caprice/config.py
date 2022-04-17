@@ -1,4 +1,8 @@
 import os
+import pathlib
 
 name = "Caprice"
-data_dir = os.path.join(os.getcwd(), "data")
+
+# data folder path
+cwd = pathlib.Path(__file__).resolve().parent
+data_dir = os.path.join(cwd, "data")

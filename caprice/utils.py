@@ -1,5 +1,5 @@
 import os
-from primitives import GArray, GNumber
+from .primitives import GArray, GNumber
 
 def rect_primitive(rect):
     """Construct GArray reprents the rectangle

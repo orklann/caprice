@@ -1,6 +1,6 @@
-from primitives import GDictionary, GName, GArray, GIndirect, GStream
-from utils import rect_primitive
-import font
+from .primitives import GDictionary, GName, GArray, GIndirect, GStream
+from .utils import rect_primitive
+from . import font
 
 class Page:
     """Page presents a page in PDF.

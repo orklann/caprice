@@ -1,10 +1,14 @@
 # Make it works to import parent pacakage
 # To run: python examples/save_pdf_sample.py
+import pathlib
 import sys
-sys.path.insert(0, '.')
+import os
+
+cwd = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(cwd))
+
 from caprice.document import Document
 from caprice import font
-import os
 
 def save_pdf():
     doc = Document()
