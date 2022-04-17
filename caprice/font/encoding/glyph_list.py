@@ -10,7 +10,11 @@ class GlyphList:
     """
 
     def __new__(cls):
-        """Make this GlyphList singleton"""
+        """Make this GlyphList singleton
+
+        More info at: 
+        https://www.python.org/download/releases/2.2/descrintro/#__new__
+        """
         it = cls.__dict__.get("__it__")
         if it is not None:
             return it
