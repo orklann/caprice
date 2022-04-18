@@ -27,8 +27,8 @@ class TestGlyphList(unittest.TestCase):
 
     def test_name_to_unicode(self):
         gl = GlyphList()
-        self.assertEqual(gl.name_to_unicode("A"), "A")
-        self.assertEqual(gl.name_to_unicode("dalethiriq"), "דִ")
+        self.assertEqual(gl._name_to_unicode("A"), "A")
+        self.assertEqual(gl._name_to_unicode("dalethiriq"), "דִ")
         self.assertEqual(gl.name_to_unicode("a9", zapf=True), "✠")
 
     def test_unicode_to_name(self):
@@ -36,3 +36,8 @@ class TestGlyphList(unittest.TestCase):
         self.assertEqual(gl.unicode_to_name("ד"), "afii57667")
         self.assertEqual(gl.unicode_to_name("ד", zapf=True), ".notdef")
         self.assertEqual(gl.unicode_to_name("❆", zapf=True), "a65")
+
+    def test_class_name_to_unicode(self):
+        self.assertEqual(GlyphList.name_to_unicode("A"), "A")
+        self.assertEqual(GlyphList.name_to_unicode("dalethiriq"), "דִ")
+        self.assertEqual(GlyphList.name_to_unicode("a9", zapf=True), "✠")

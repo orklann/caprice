@@ -30,7 +30,11 @@ class GlyphList:
         self.zapf_unicode_to_name = None
         self.load()
     
-    def name_to_unicode(self, name, zapf=False):
+    @classmethod
+    def name_to_unicode(cls, name, zapf=False):
+        return GlyphList()._name_to_unicode(name, zapf=zapf)
+
+    def _name_to_unicode(self, name, zapf=False):
         """Maps the given glyph name to a string by using Adobe glyph list.
         Return None if we find no mapping.
 
