@@ -34,6 +34,10 @@ class GlyphList:
     def name_to_unicode(cls, name, zapf=False):
         return GlyphList()._name_to_unicode(name, zapf=zapf)
 
+    @classmethod
+    def unicode_to_name(cls, unicode, zapf=False):
+        return GlyphList()._unicode_to_name(unicode, zapf=zapf)
+
     def _name_to_unicode(self, name, zapf=False):
         """Maps the given glyph name to a string by using Adobe glyph list.
         Return None if we find no mapping.
@@ -48,7 +52,7 @@ class GlyphList:
         else:
             return None
 
-    def unicode_to_name(self, unicode, zapf=False):
+    def _unicode_to_name(self, unicode, zapf=False):
         """Maps the given unicode to a glyph name by using Adobe glyph list.
         Return .notdef if there is no such mapping.
 
