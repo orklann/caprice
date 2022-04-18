@@ -28,6 +28,21 @@ class GlyphList:
         self.standard_unicode_to_name = None
         self.zapf_name_to_unicode = None
         self.zapf_unicode_to_name = None
+        self.load()
+    
+    def name_to_unicode(self, name, zapf=False):
+        """Maps the given glyph name to a string by using Adobe glyph lista.
+        Return None if we find no mapping.
+
+        If we are looking mapping for ZapfDingbats font, the `zapf` should be
+        set to True.
+        """
+        if zapf and name in self.zapf_name_to_unicode:
+            return self.zapf_name_to_unicode[name]
+        elif name in self.standard_name_to_unicode:
+            return self.standard_name_to_unicode[name]
+        else:
+            return None
 
     def load(self):
         """Load two kinds of Adobe glyph list files as mappings"""
