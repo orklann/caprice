@@ -18,13 +18,13 @@ class TestZapfDingbatsEncoding(unittest.TestCase):
         self.assertEqual(zapf.code("a179"), 0o351)
 
     def test_unicode(self):
-        """Test base class's unicode() method"""
+        """Test unicode() method"""
         zapf = ZapfDingbatsEncoding()
         self.assertEqual(zapf.unicode(0o042), "✂")
         self.assertEqual(zapf.unicode(0o244), "❤")
 
     def test_code_from_unicode(self):
-        """Test base class's code_from_unicode() method"""
+        """Test code_from_unicode() method"""
         zapf = ZapfDingbatsEncoding()
         self.assertEqual(zapf.code_from_unicode("✂"), 0o042)
         self.assertEqual(zapf.code_from_unicode("❤"), 0o244)
