@@ -33,3 +33,11 @@ class Encoding:
             if self.code_to_name[c] == name:
                 return c
             return None
+
+    def code_from_unicode(self, unicode):
+        """Return the character code for the given unicode, return None if not
+        found.
+        """
+
+        # TODO: Add unit test for this method
+        return self.code(GlyphList.unicode_to_name(unicode))
