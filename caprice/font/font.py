@@ -1,4 +1,5 @@
 from ..primitives import GDictionary, GName
+from .type1.font import Type1
 
 # All 14 Type1 standard fonts
 Times_Roman = "Times-Roman"
@@ -36,7 +37,9 @@ Standard_Fonts = [
 
 class Font:
     def __init__(self, font_file, doc, new_tag):
-        if (font_file in Standard_Fonts):
+        if font_file in Standard_Fonts:
+            # Type 1 font
+            self.font = Type1(font_file)
             self.standard_font_name = font_file
             self.dict = GDictionary()
             self.dict.set(GName("Type"), GName("Font"))
