@@ -52,6 +52,14 @@ class Font:
         self.doc = doc
         self.tag = new_tag
 
+
+    def code(self, unicode):
+        """Return character code for the given unicode for font"""
+        return self.font.code(unicode)
+
+    def width(self, unicode, font_size):
+        return self.font.width(unicode, font_size)
+
     def compile_str(self):
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()

@@ -22,3 +22,15 @@ class TestFont(unittest.TestCase):
         f = Font(font.Times_Roman, doc, "F1")
         expected = "3 0 obj\r\n<</Type /Font /Subtype /Type1 /BaseFont /%s>>\r\nendobj\r\n\r\n" % font.Times_Roman
         self.assertEqual(f.compile_bytes(), str.encode(expected))
+
+    def test_code(self):
+        doc = Document()
+        f = Font(font.Times_Roman, doc, "F1")
+        self.assertEqual(f.code("®"), 0o256)
+        self.assertEqual(f.code("€"), 0o200)
+
+    def test_width(self):
+        doc = Document()
+        f = Font(font.Courier, doc, "F1")
+        w = f.width("A", 12)
+        self.assertEqual(w, 8)
