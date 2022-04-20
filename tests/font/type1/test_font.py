@@ -12,3 +12,9 @@ class TestType1(unittest.TestCase):
         self.assertEqual(cap_height, 662)
         self.assertEqual(ascender, 683)
         self.assertEqual(descender, -217)
+
+    def test_code(self):
+        type1 = Type1(font.Times_Roman)
+        # By default Type1 font use WinAnsiEncoding
+        self.assertEqual(type1.code("®"), 0o256)
+        self.assertEqual(type1.code("€"), 0o200)
