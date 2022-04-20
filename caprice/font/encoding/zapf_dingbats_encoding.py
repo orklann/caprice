@@ -5,6 +5,8 @@ class ZapfDingbatsEncoding(Encoding):
     def __init__(self):
         super().__init__()
         # Use built-in ZapfDingbats font's encoding.
+        # General speaking, ZapfDingbats font's built-in encoding should be as
+        # same as PDF reference D.6
         # By the way, there is no PDF encoding named ZapfDingbatsEncoding.
         self.encoding_name = "StandardEncoding"
         self.code_to_name = {
