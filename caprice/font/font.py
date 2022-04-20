@@ -61,6 +61,10 @@ class Font:
     def width(self, unicode, font_size):
         return self.font.width(unicode, font_size)
 
+    def text_unicode_to_code(self, text):
+        """Convert a text in unicode strings into character code string"""
+        return self.font.text_unicode_to_code(text)
+
     def compile_str(self):
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()

@@ -32,3 +32,12 @@ class Type1:
                     + unicode)
         metrics = self.afm[glyph_name]
         return ceil(font_size / self.UNITS_PER_EM * metrics[1])
+
+    def text_unicode_to_code(self, text):
+        """Convert a text in unicode strings into character code string"""
+        string = ""
+        for unicode in text:
+            c = self.code(unicode)
+            s = "\\" + "{0:o}".format(c)
+            string += s
+        return string
