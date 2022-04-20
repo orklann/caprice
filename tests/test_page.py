@@ -33,7 +33,8 @@ class TestPage(unittest.TestCase):
         height = page.rect[3]
         flipped_y = height - 0
         y = flipped_y
-        expected = "BT\n/F1 12 Tf\n%d %d Td\n(%s) Tj\nET\n\n" % (0, y, text)
+        code_string = page.current_font.text_unicode_to_code(text)
+        expected = "BT\n/F1 12 Tf\n%d %d Td\n[%s] TJ\nET\n\n" % (0, y, code_string)
         self.assertEqual(page.content, expected)
         
         # Test 2, without explictly setting a font
@@ -45,7 +46,8 @@ class TestPage(unittest.TestCase):
         height = page.rect[3]
         flipped_y = height - 0
         y = flipped_y
-        expected = "BT\n/F1 18 Tf\n%d %d Td\n(%s) Tj\nET\n\n" % (0, y, text)
+        code_string = page.current_font.text_unicode_to_code(text)
+        expected = "BT\n/F1 18 Tf\n%d %d Td\n[%s] TJ\nET\n\n" % (0, y, code_string)
         self.assertEqual(page.content, expected)
         
         

@@ -38,6 +38,7 @@ class Type1:
         string = ""
         for unicode in text:
             c = self.code(unicode)
-            s = "\\" + "{0:o}".format(c)
+            s = " (\\" + "{0:o}".format(c) + ")"
             string += s
+        string += " "
         return string

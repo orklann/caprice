@@ -74,8 +74,9 @@ class Page:
             # If current font is None, we set it to Times Romans by default
             font1 = self.add_font(font.Times_Roman)
             self.use_font(font1)
-        text_operators = "BT\n/%s %d Tf\n%d %d Td\n(%s) Tj\nET\n\n" % \
-                    (self.current_font.tag, self.current_font_size, x, y, text)
+        code_string = self.current_font.text_unicode_to_code(text)
+        text_operators = "BT\n/%s %d Tf\n%d %d Td\n[%s] TJ\nET\n\n" % \
+                    (self.current_font.tag, self.current_font_size, x, y, code_string)
         self.content += text_operators
 
     def compile_str(self):
