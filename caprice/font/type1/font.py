@@ -1,8 +1,8 @@
+from math import ceil
+from fontTools.afmLib import AFM
 from ... import config
 from ... import utils
 from ..encoding import WinAnsiEncoding
-
-from fontTools.afmLib import AFM
 
 class Type1:
     """Type1 font class for 14 standard fonts"""
@@ -11,6 +11,8 @@ class Type1:
         self.font_name = font_name
         self.afm = None
         self.load_afm()
+        # All measurements in AFM files use 1000 as units per em
+        self.UNITS_PER_EM = 1000.0
         # We here use WinAnsiEncoding for all 14 standards fonts in PDF 
         self.encoding = WinAnsiEncoding()
 
@@ -22,3 +24,11 @@ class Type1:
     def code(self, unicode):
         """Return character code for the given unicode for Type1 font"""
         return self.encoding.code_from_unicode(unicode)
+
+    def width(self, unicode, font_size):
+        glyph_name = self.encoding.unicode_to_name(unicode)
+        if glyph_name is None:
+            raise Exception("Glyph name not found in encoding for unicode " \
+                    + unicode)
+        metrics = self.afm[glyph_name]
+        return ceil(font_size / self.UNITS_PER_EM * metrics[1])

@@ -18,3 +18,8 @@ class TestType1(unittest.TestCase):
         # By default Type1 font use WinAnsiEncoding
         self.assertEqual(type1.code("®"), 0o256)
         self.assertEqual(type1.code("€"), 0o200)
+
+    def test_width(self):
+        type1 = Type1(font.Courier)
+        w = type1.width("A", 12)
+        self.assertEqual(w, 8)
