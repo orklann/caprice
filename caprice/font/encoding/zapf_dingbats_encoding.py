@@ -4,6 +4,9 @@ from .glyph_list import GlyphList
 class ZapfDingbatsEncoding(Encoding):
     def __init__(self):
         super().__init__()
+        # Use built-in ZapfDingbats font's encoding.
+        # By the way, there is no PDF encoding named ZapfDingbatsEncoding.
+        self.encoding_name = "StandardEncoding"
         self.code_to_name = {
             0o040: "space",
             0o041: "a1",

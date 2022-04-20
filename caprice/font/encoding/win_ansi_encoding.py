@@ -3,6 +3,7 @@ from .base import Encoding
 class WinAnsiEncoding(Encoding):
     def __init__(self):
         super().__init__()
+        self.encoding_name = "WinAnsiEncoding"
         self.code_to_name = {
             0o101: "A",
             0o306: "AE",
