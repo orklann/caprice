@@ -14,7 +14,7 @@ from caprice.font.encoding.win_ansi_encoding import WinAnsiEncoding
 
 CHARS = None
 CHARS_PER_LINE = 40
-x, y = 40, 30
+x, y = 60, 30
 
 def generate_text():
     win = WinAnsiEncoding()
@@ -43,12 +43,13 @@ def draw_text(page, font_name):
     global y
     font = page.add_font(font_name)
     page.use_font(font)
-    page.set_font_size(12)
+    page.set_font_size(14)
     # Draw font name
     page.draw_text(x, y, font_name)
     y += 16
     
     # Draw characters
+    page.set_font_size(12)
     consumed = 0
     start = 0
     l = CHARS_PER_LINE
@@ -59,9 +60,9 @@ def draw_text(page, font_name):
         for c in text:
             page.draw_text(ix, y, c)
             ix += 12
-        y += 12
+        y += 14
         start+= l
         consumed += l
-    y += 30
+    y += 20
 
 save_pdf()
