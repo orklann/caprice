@@ -76,6 +76,7 @@ class Font:
         encoding_dict.set(GName("Differences"), difference)
 
     def compile_str(self):
+        self.build_difference()
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()
         else:
