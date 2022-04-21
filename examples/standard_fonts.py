@@ -22,7 +22,7 @@ def generate_text():
     for code in win.code_to_name:
         unicode = win.unicode(code)
         text += unicode
-    return sorted(text)
+    return "".join(sorted(text))
 
 
 def save_pdf():
