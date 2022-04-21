@@ -13,3 +13,7 @@ How to run unit tests
 ```
 python -m unittest
 ```
+
+Author
+======
+Aaron Elkins, [https://rkt.pixelegg.me](https://rkt.pixelegg.me/)
