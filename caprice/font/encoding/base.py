@@ -35,7 +35,7 @@ class Encoding:
         """Return the character code for the given unicode, return None if not
         found.
         """
-        return self.code(GlyphList.unicode_to_name(unicode))
+        return self.code(self.unicode_to_name(unicode))
 
     def unicode_to_name(self, unicode):
         """Return glyph name for the given unicode by looking the Adobe Glyph List."""
