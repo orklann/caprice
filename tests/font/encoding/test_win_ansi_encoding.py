@@ -44,3 +44,15 @@ class TestWinAnsiEncoding(unittest.TestCase):
         self.assertEqual(c1, 1)
         c2 = win.code_from_unicode("ı")
         self.assertEqual(c2, 2)
+
+    def test_build_difference(self):
+        """Test base class's build_difference() method"""
+        win = WinAnsiEncoding()
+        self.assertEqual(win.code_from_unicode("®"), 0o256)
+        self.assertEqual(win.code_from_unicode("€"), 0o200)
+        # Make sure to call code_from_unicode() to construct difference
+        c1 = win.code_from_unicode("˚")
+        c2 = win.code_from_unicode("ı")
+        array = win.build_difference()
+        expected = "[1 /ring 2 /dotlessi]"
+        self.assertEqual(array.compile_str(), expected)

@@ -69,6 +69,9 @@ class Font:
         return self.font.text_unicode_to_code(text)
 
     def compile_str(self):
+        encoding_dict = self.dict.get(GName("Encoding"))
+        difference = self.font.encoding.build_difference()
+        encoding_dict.set(GName("Differences"), difference)
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()
         else:

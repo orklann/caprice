@@ -1,4 +1,5 @@
 from .glyph_list import GlyphList
+from ...primitives import GArray, GName, GNumber
 
 class Encoding:
     """Base class for all encoding classes"""
@@ -10,6 +11,13 @@ class Encoding:
         #       before calling other methods.
         self.diff_code_to_name = {}
         self.encoding_name = None
+
+    def build_difference(self):
+        array = GArray()
+        for code in self.diff_code_to_name:
+            array.append(GNumber(code))
+            array.append(GName(self.diff_code_to_name[code]))
+        return array
 
     def _diff_code_from_unicode(self, unicode):
         name = self.unicode_to_name(unicode)
