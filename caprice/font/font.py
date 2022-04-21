@@ -84,5 +84,4 @@ class Font:
             pass
 
     def compile_bytes(self):
-        print("aaaa")
         return str.encode(self.compile_str())            
