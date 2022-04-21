@@ -16,4 +16,4 @@ python -m unittest
 
 Author
 ======
-Aaron Elkins, [https://rkt.pixelegg.me](https://rkt.pixelegg.me/)
+[Aaron Elkins](https://twitter.com/ryh1113), [https://rkt.pixelegg.me](https://rkt.pixelegg.me/)
