@@ -42,3 +42,6 @@ class Type1:
             string += s
         string += " "
         return string
+
+    def build_difference(self):
+        return self.encoding.build_difference()

@@ -66,12 +66,16 @@ class Font:
 
     def text_unicode_to_code(self, text):
         """Convert a text in unicode strings into character code string"""
-        return self.font.text_unicode_to_code(text)
+        code_string = self.font.text_unicode_to_code(text)
+        self.build_difference()
+        return code_string
+
+    def build_difference(self):
+        encoding_dict = self.dict.get(GName("Encoding"))
+        difference = self.font.build_difference()
+        encoding_dict.set(GName("Differences"), difference)
 
     def compile_str(self):
-        encoding_dict = self.dict.get(GName("Encoding"))
-        difference = self.font.encoding.build_difference()
-        encoding_dict.set(GName("Differences"), difference)
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()
         else:
@@ -79,4 +83,5 @@ class Font:
             pass
 
     def compile_bytes(self):
+        print("aaaa")
         return str.encode(self.compile_str())            
