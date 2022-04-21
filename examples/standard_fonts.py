@@ -61,7 +61,7 @@ def draw_text(page, font_name):
             page.draw_text(ix, y, c)
             ix += 12
         y += 14
-        start+= l
+        start += l
         consumed += l
     y += 20
 
