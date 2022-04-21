@@ -45,7 +45,10 @@ class Font:
             self.dict.set(GName("Type"), GName("Font"))
             self.dict.set(GName("Subtype"), GName("Type1"))
             self.dict.set(GName("BaseFont"), GName(self.standard_font_name))
-            self.dict.set(GName("Encoding"), GName(self.font.encoding.encoding_name))
+            encoding_dict = GDictionary()
+            encoding_dict.set(GName("Type"), GName("Encoding"))
+            encoding_dict.set(GName("BaseEncoding"), GName(self.font.encoding.encoding_name))
+            self.dict.set(GName("Encoding"), encoding_dict)
             self.indirect_obj = doc.new_indirect()
             self.indirect_obj.set_object(self.dict)
         else:
