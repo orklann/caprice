@@ -34,3 +34,6 @@ class TestFont(unittest.TestCase):
         f = Font(font.Courier, doc, "F1")
         w = f.width("A", 12)
         self.assertEqual(w, 8)
+
+    def test_latin_chars(self):
+        self.assertEqual(len(font.LATIN_CHARS), 229)

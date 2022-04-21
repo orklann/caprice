@@ -1,5 +1,6 @@
 from ..primitives import GDictionary, GName
 from .type1.font import Type1
+from .latin_chars import LATIN_CHARS
 
 # All 14 Type1 standard fonts
 Times_Roman = "Times-Roman"
