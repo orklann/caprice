@@ -76,6 +76,7 @@ class Font:
         encoding_dict.set(GName("Differences"), difference)
 
     def compile_str(self):
+        """Only for tests, we use primitives's compile_str()"""
         self.build_difference()
         if self.standard_font_name is not None:
             return self.indirect_obj.compile_str()
@@ -84,4 +85,5 @@ class Font:
             pass
 
     def compile_bytes(self):
+        """Only for tests, we use primitives's compile_bytes()"""
         return str.encode(self.compile_str())            
