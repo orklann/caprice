@@ -1,9 +1,9 @@
-# Make it works to import parent pacakage
 # To run: python examples/save_pdf_sample.py
 import pathlib
 import sys
 import os
 
+# Make it works to import parent pacakage
 cwd = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(cwd))
 

@@ -21,6 +21,10 @@ class Page:
     def set_size(self, w, h):
         self.rect[2] = w
         self.rect[3] = h
+        # /MediaBox: Hardcoded at the moment
+        self.dict.set(GName("MediaBox"), rect_primitive(self.rect))
+        # /CropBox: Hardcoded at the moment
+        self.dict.set(GName("CropBox"), rect_primitive(self.rect))
 
     def __init_dict(self):
         # /Type: /Page
