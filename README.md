@@ -9,7 +9,7 @@ Caprice
 **Caprice** is a robust Python library for generating PDF.
 
 Usage
-=====
+-----
 ```python
 from caprice.document import Document
 
@@ -26,5 +26,5 @@ python -m unittest
 ```
 
 Author
-======
+------
 [Aaron Elkins](https://twitter.com/ryh1113) ([https://rkt.pixelegg.me](https://rkt.pixelegg.me/))
