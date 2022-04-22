@@ -8,6 +8,10 @@ Caprice
 =======
 **Caprice** is a robust Python library for generating PDF.
 
+Notes
+-----
+Caprice is in development, and can not be used in any purpose yet. But It's in rapidly development, just keep watching this repo, you will get suprise.
+
 Usage
 -----
 ```python
