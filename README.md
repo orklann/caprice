@@ -8,6 +8,17 @@ Caprice
 =======
 **Caprice** is a robust Python library for generating PDF.
 
+Usage
+=====
+```python
+from caprice.document import Document
+
+doc = Document()
+page = doc.add_page()
+page.draw_text(0, 0, "Hello Caprice!")
+doc.save("hello.pdf")
+```
+
 How to run unit tests
 ---------------------
 ```
