@@ -38,3 +38,7 @@ python -m unittest
 Author
 ------
 [Aaron Elkins](https://twitter.com/ryh1113) ([https://rkt.pixelegg.me](https://rkt.pixelegg.me/))
+
+License
+-------
+Please see [LICENSE](https://github.com/orklann/caprice/blob/0d250c86b90a6e0bd93d85c7d11b0baa269652b4/LICENSE) for licensing details.
