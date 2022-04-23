@@ -16,7 +16,11 @@ def get_version():
 
 setup(
     name='caprice',
-    packages=find_packages(include=['caprice'], exclude=['tests', 'tests.*', 'resources']),
+    packages=find_packages(exclude=['tests', 'tests.*', 'resources']),
+    include_package_data=True,
+    package_data={'caprice': ['data/caprice/afm/*.afm', 
+        'data/caprice/encoding/*.txt']},
+    install_requires=["fonttools"],
     version=get_version(),
     url='https://github.com/orklann/caprice',
     description='Robust Python library for generating PDF',
