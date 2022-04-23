@@ -18,7 +18,7 @@ def save_pdf():
     font1 = page.add_font(font.Times_Roman)
     page.use_font(font1)
     page.set_font_size(12)
-    page.draw_text(0, 14, "Hello World!(A)")
+    page.draw_text(0, 0, "Hello World!(A)")
     page.draw_text(0, 30, "Euro Sign (€), Ring ˚")
     page.draw_text(0, 0, "Hello, World again!", bottom_left=True)
     home = os.path.expanduser("~")

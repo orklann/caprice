@@ -65,6 +65,9 @@ class Font:
     def width(self, unicode, font_size):
         return self.font.width(unicode, font_size)
 
+    def font_metrics(self, font_size):
+        return self.font.font_metrics(font_size)
+
     def text_unicode_to_code(self, text):
         """Convert a text in unicode strings into character code string"""
         code_string = self.font.text_unicode_to_code(text)

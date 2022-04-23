@@ -25,6 +25,15 @@ class Type1:
         """Return character code for the given unicode for Type1 font"""
         return self.encoding.code_from_unicode(unicode)
 
+    def font_metrics(self, font_size):
+        scale = font_size / self.UNITS_PER_EM 
+        metrics = {
+            "cap_height": ceil(self.afm.CapHeight * scale),
+            "ascender": ceil(self.afm.Ascender * scale),
+            "descender": ceil(self.afm.Descender * scale)
+        }
+        return metrics
+
     def width(self, unicode, font_size):
         glyph_name = self.encoding.unicode_to_name(unicode)
         if glyph_name is None:
