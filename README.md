@@ -12,6 +12,12 @@ Notes
 -----
 Caprice is in development, and can not be used in any purpose yet. But It's in rapidly development, just keep watching this repo, you will get surprises.
 
+How to install
+--------------
+```shell
+pip install caprice
+```
+
 Usage
 -----
 ```python
