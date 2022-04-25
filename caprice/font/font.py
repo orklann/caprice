@@ -41,6 +41,7 @@ class Font:
         if font_file in Standard_Fonts:
             # Type 1 font
             self.font = Type1(font_file)
+            self.type = "Type1"
             self.standard_font_name = font_file
             self.dict = GDictionary()
             self.dict.set(GName("Type"), GName("Font"))
@@ -53,6 +54,8 @@ class Font:
             self.indirect_obj = doc.new_indirect()
             self.indirect_obj.set_object(self.dict)
         else:
+            self.type = "TrueType"
+            # TODO: Remove standard_font_name attribute, since it's useless here
             self.standard_font_name = font_file
             self.dict = GDictionary()
             self.dict.set(GName("Type"), GName("Font"))
