@@ -53,7 +53,10 @@ class Font:
             self.indirect_obj = doc.new_indirect()
             self.indirect_obj.set_object(self.dict)
         else:
-            self.standard_font_name = None
+            self.standard_font_name = font_file
+            self.dict = GDictionary()
+            self.dict.set(GName("Type"), GName("Font"))
+            self.dict.set(GName("Subtype"), GName("TrueType"))
         self.doc = doc
         self.tag = new_tag
 

@@ -1,15 +1,25 @@
+import pathlib
 import unittest
 from caprice.font import Font
 from caprice.document import Document
+from caprice.primitives import GName
 from caprice import font
+from caprice import utils
 
 class TestFont(unittest.TestCase):
     def test_standard_font(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")
         self.assertEqual(f.standard_font_name, font.Times_Roman)
-        f = Font("times_roman.ttf", doc, "F1")
-        self.assertEqual(f.standard_font_name, None)
+
+    def test_truetype_font(self):
+        doc = Document()
+        cwd = pathlib.Path(__file__).resolve().parent.parent
+        font_file = utils.join_paths(cwd, "data/fonts/Roboto Mono.otf")
+        f = Font(font_file, doc, "F1")
+        font_dict = f.dict
+        self.assertEqual(font_dict.get(GName("Type")), GName("Font"))
+        self.assertEqual(font_dict.get(GName("Subtype")), GName("TrueType"))
 
     def test_compile_str(self):
         doc = Document()
