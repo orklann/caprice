@@ -60,9 +60,9 @@ class Font:
             self.dict = GDictionary()
             self.dict.set(GName("Type"), GName("Font"))
             self.dict.set(GName("Subtype"), GName("TrueType"))
+            self.unicode_set = set()
         self.doc = doc
         self.tag = new_tag
-
 
     def code(self, unicode):
         """Return character code for the given unicode for font"""
@@ -84,6 +84,10 @@ class Font:
         encoding_dict = self.dict.get(GName("Encoding"))
         difference = self.font.build_difference()
         encoding_dict.set(GName("Differences"), difference)
+
+    def add_to_unicode_set(self, unicode):
+        if self.type == "TrueType":
+            self.unicode_set.add(unicode)
 
     def compile_str(self):
         """Only for tests, we use primitives's compile_str()"""

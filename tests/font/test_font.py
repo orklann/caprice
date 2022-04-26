@@ -7,6 +7,11 @@ from caprice import font
 from caprice import utils
 
 class TestFont(unittest.TestCase):
+    def get_font_file_path(self):
+        cwd = pathlib.Path(__file__).resolve().parent.parent
+        font_file = utils.join_paths(cwd, "data/fonts/Roboto Mono.otf")
+        return font_file
+
     def test_standard_font(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")
@@ -14,13 +19,22 @@ class TestFont(unittest.TestCase):
 
     def test_truetype_font(self):
         doc = Document()
-        cwd = pathlib.Path(__file__).resolve().parent.parent
-        font_file = utils.join_paths(cwd, "data/fonts/Roboto Mono.otf")
+        font_file = self.get_font_file_path()
         f = Font(font_file, doc, "F1")
         font_dict = f.dict
         self.assertEqual(font_dict.get(GName("Type")), GName("Font"))
         self.assertEqual(font_dict.get(GName("Subtype")), GName("TrueType"))
 
+    def test_add_to_unicode_set(self):
+        doc = Document()
+        font_file = self.get_font_file_path()
+        f = Font(font_file, doc, "F1")
+        f.add_to_unicode_set(ord("A"))
+        f.add_to_unicode_set(ord("A"))
+        f.add_to_unicode_set(ord("B"))
+        expected = set([ord("A"), ord("B")])
+        self.assertEqual(f.unicode_set, expected)
+        
     def test_compile_str(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")
