@@ -84,6 +84,7 @@ class Page:
             # Now y is increse from bottom to top
             # It's in bottom-left coordinate
             y -= ascender
+        self.current_font.update_unicode_set(text)
         code_string = self.current_font.text_unicode_to_code(text)
         text_operators = "BT\n/%s %d Tf\n%d %d Td\n[%s] TJ\nET\n\n" % \
                     (self.current_font.tag, self.current_font_size, x, y, code_string)

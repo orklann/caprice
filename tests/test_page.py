@@ -1,10 +1,17 @@
 import unittest
+import pathlib
 from caprice.page import Page
 from caprice.document import Document
 from caprice.primitives import GName, GRef
 from caprice import font
+from caprice import utils
 
 class TestPage(unittest.TestCase):
+    def get_font_file_path(self):
+        cwd = pathlib.Path(__file__).resolve().parent
+        font_file = utils.join_paths(cwd, "data/fonts/Roboto Mono.otf")
+        return font_file
+
     def test_indirect_obj(self):
         doc = Document()
         page = Page(doc)
@@ -56,5 +63,4 @@ class TestPage(unittest.TestCase):
         expected = "BT\n/F1 18 Tf\n%d %d Td\n[%s] TJ\nET\n\n" % (0, y, code_string)
         self.assertEqual(page.content, expected)
         
-        
-
+        # TODO: Test 3, particularly test update_unicode_text for TrueType font

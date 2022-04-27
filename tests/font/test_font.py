@@ -35,6 +35,17 @@ class TestFont(unittest.TestCase):
         expected = set([ord("A"), ord("B")])
         self.assertEqual(f.unicode_set, expected)
         
+    def test_update_unicode_set(self):
+        doc = Document()
+        font_file = self.get_font_file_path()
+        f = Font(font_file, doc, "F1")
+        text = "ABCDEFGABCDEFG"
+        f.update_unicode_set(text)
+        expected = set()
+        for c in text:
+            expected.add(ord(c))
+        self.assertEqual(f.unicode_set, expected)
+
     def test_compile_str(self):
         doc = Document()
         f = Font(font.Times_Roman, doc, "F1")

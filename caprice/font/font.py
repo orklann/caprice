@@ -89,6 +89,10 @@ class Font:
         if self.type == "TrueType":
             self.unicode_set.add(unicode)
 
+    def update_unicode_set(self, text):
+        for c in text:
+            self.add_to_unicode_set(ord(c))
+
     def compile_str(self):
         """Only for tests, we use primitives's compile_str()"""
         self.build_difference()
