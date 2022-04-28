@@ -62,6 +62,7 @@ class Font:
             self.dict = GDictionary()
             self.dict.set(GName("Type"), GName("Font"))
             self.dict.set(GName("Subtype"), GName("TrueType"))
+            self.dict.set(GName("BaseFont"), GName(self.font.get_base_font()))
             self.unicode_set = set()
         self.doc = doc
         self.tag = new_tag
