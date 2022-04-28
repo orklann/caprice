@@ -13,3 +13,8 @@ class TestTrueType(unittest.TestCase):
         font_file = self.get_font_file_path()
         font = TrueType(font_file)
         self.assertEqual(font.font is not None, True)
+
+    def test_get_base_font(self):
+        font_file = self.get_font_file_path()
+        font = TrueType(font_file)
+        self.assertEqual(font.get_base_font(), "RobotoMonoNerdMediumPatchRegular")
