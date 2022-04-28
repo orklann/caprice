@@ -1,5 +1,6 @@
 from ..primitives import GDictionary, GName
 from .type1.font import Type1
+from .truetype.font import TrueType
 from .latin_chars import LATIN_CHARS
 
 # All 14 Type1 standard fonts
@@ -54,6 +55,7 @@ class Font:
             self.indirect_obj = doc.new_indirect()
             self.indirect_obj.set_object(self.dict)
         else:
+            self.font = TrueType(font_file)
             self.type = "TrueType"
             # TODO: Remove standard_font_name attribute, since it's useless here
             self.standard_font_name = font_file
