@@ -1,4 +1,4 @@
-from ..primitives import GDictionary, GName
+from ..primitives import GDictionary, GName, GNumber
 from .type1.font import Type1
 from .truetype.font import TrueType
 from .latin_chars import LATIN_CHARS
@@ -95,6 +95,13 @@ class Font:
     def update_unicode_set(self, text):
         for c in text:
             self.add_to_unicode_set(ord(c))
+
+    def update(self):
+        """Update font dictionary for TrueType fonts"""
+        if self.type == "TrueType" and len(self.unicode_set) > 0:
+            sorted_unicode_set = sorted(self.unicode_set)
+            self.dict.set(GName("FirstChar"), GNumber(sorted_unicode_set[0]))
+            self.dict.set(GName("LastChar"), GNumber(sorted_unicode_set[-1]))
 
     def compile_str(self):
         """Only for tests, we use primitives's compile_str()"""

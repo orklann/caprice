@@ -2,7 +2,7 @@ import pathlib
 import unittest
 from caprice.font import Font
 from caprice.document import Document
-from caprice.primitives import GName
+from caprice.primitives import GName, GNumber
 from caprice import font
 from caprice import utils
 
@@ -25,6 +25,19 @@ class TestFont(unittest.TestCase):
         self.assertEqual(font_dict.get(GName("Type")), GName("Font"))
         self.assertEqual(font_dict.get(GName("Subtype")), GName("TrueType"))
         self.assertEqual(font_dict.get(GName("BaseFont")), GName("RobotoMonoNerdMediumPatchRegular"))
+
+    def test_update(self):
+        doc = Document()
+        font_file = self.get_font_file_path()
+        f = Font(font_file, doc, "F1")
+        f.add_to_unicode_set(ord("A"))
+        f.add_to_unicode_set(ord("B"))
+        f.add_to_unicode_set(ord("M"))
+        f.update()
+        expected = GNumber(ord("A")).compile_str()
+        self.assertEqual(f.dict.get(GName("FirstChar")).compile_str(), expected)
+        expected = GNumber(ord("M")).compile_str()
+        self.assertEqual(f.dict.get(GName("LastChar")).compile_str(), expected)
 
     def test_add_to_unicode_set(self):
         doc = Document()
