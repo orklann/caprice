@@ -2,7 +2,7 @@ import pathlib
 import unittest
 from caprice.font import Font
 from caprice.document import Document
-from caprice.primitives import GName, GNumber
+from caprice.primitives import GName, GNumber, GArray
 from caprice import font
 from caprice import utils
 
@@ -10,6 +10,11 @@ class TestFont(unittest.TestCase):
     def get_font_file_path(self):
         cwd = pathlib.Path(__file__).resolve().parent.parent
         font_file = utils.join_paths(cwd, "data/fonts/Roboto Mono.otf")
+        return font_file
+
+    def get_open_sans_path(self):
+        cwd = pathlib.Path(__file__).resolve().parent.parent
+        font_file = utils.join_paths(cwd, "data/fonts/OpenSans-Regular.ttf")
         return font_file
 
     def test_standard_font(self):
@@ -39,6 +44,20 @@ class TestFont(unittest.TestCase):
         expected = GNumber(ord("M")).compile_str()
         self.assertEqual(f.dict.get(GName("LastChar")).compile_str(), expected)
 
+        # Test case for /Widths array
+        font_file = self.get_open_sans_path()
+        f = Font(font_file, doc, "F2")
+        f.add_to_unicode_set(ord("A"))
+        f.add_to_unicode_set(ord("B"))
+        f.add_to_unicode_set(ord("D"))
+        f.update()
+        expected = GArray()
+        expected.append(GNumber(int(632.324219)))
+        expected.append(GNumber(int(645.996094)))
+        expected.append(GNumber(0))
+        expected.append(GNumber(int(725.585938)))
+        self.assertEqual(f.dict.get(GName("Widths")).compile_str(), expected.compile_str())
+        
     def test_add_to_unicode_set(self):
         doc = Document()
         font_file = self.get_font_file_path()

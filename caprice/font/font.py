@@ -1,4 +1,4 @@
-from ..primitives import GDictionary, GName, GNumber
+from ..primitives import GDictionary, GName, GNumber, GArray
 from .type1.font import Type1
 from .truetype.font import TrueType
 from .latin_chars import LATIN_CHARS
@@ -102,7 +102,30 @@ class Font:
             sorted_unicode_set = sorted(self.unicode_set)
             self.dict.set(GName("FirstChar"), GNumber(sorted_unicode_set[0]))
             self.dict.set(GName("LastChar"), GNumber(sorted_unicode_set[-1]))
+            widths = self.get_widths()
+            self.dict.set(GName("Widths"), widths)
 
+    def get_widths(self):
+        if self.type == "TrueType" and len(self.unicode_set) > 0:
+            widths = GArray()
+            cmap = self.font.font.getBestCmap()
+            glyph_set = self.font.font.getGlyphSet()
+            units_per_em = self.font.font['head'].unitsPerEm
+            sorted_unicode_set = sorted(self.unicode_set)
+            first_char = sorted_unicode_set[0]
+            last_char = sorted_unicode_set[-1]
+            for unicode in range(first_char, last_char + 1):
+                if unicode in self.unicode_set:
+                    if unicode in cmap and cmap[unicode] in glyph_set:
+                        width = glyph_set[cmap[unicode]].width
+                        width = width * (1000.0 / units_per_em)
+                        width = int(width)
+                    else:
+                        width = 0
+                    widths.append(GNumber(width))
+                else:
+                    widths.append(GNumber(0))
+            return widths
     def compile_str(self):
         """Only for tests, we use primitives's compile_str()"""
         self.build_difference()
