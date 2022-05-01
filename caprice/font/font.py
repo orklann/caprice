@@ -64,6 +64,29 @@ class Font:
             self.dict.set(GName("Subtype"), GName("TrueType"))
             self.dict.set(GName("BaseFont"), GName(self.font.get_base_font()))
             self.unicode_set = set()
+
+            # Font descriptor dictionary
+            font_descriptor_indirect = doc.new_indirect()
+            self.font_descriptor = GDictionary()
+            self.font_descriptor.set(GName("Type"), GName("FontDescriptor"))
+            self.font_descriptor.set(GName("FontName"), GName(self.font.get_base_font()))
+            # Bit 3 Symbolic, see 9.8.2
+            self.font_descriptor.set(GName("Flags"), GNumber(4))
+            # FontBBox
+            self.font_descriptor.set(GName("FontBBox"), self.get_bbox())
+            metrics = self.font.get_metrics()
+            # ItalicAngle
+            self.font_descriptor.set(GName("ItalicAngle"), GNumber(metrics["italicAngle"]))
+            # Ascent
+            self.font_descriptor.set(GName("Ascent"), GNumber(metrics["ascender"]))
+            # Descent
+            self.font_descriptor.set(GName("Descent"), GNumber(metrics["descender"]))
+            # CapHeight
+            self.font_descriptor.set(GName("CapHeight"), GNumber(metrics["capHeight"]))
+            # StemV
+            self.font_descriptor.set(GName("StemV"), GNumber(self.font.get_stemv()))
+            font_descriptor_indirect.set_object(self.font_descriptor)
+            self.dict.set(GName("FontDescriptor"), font_descriptor_indirect.get_ref())
         self.doc = doc
         self.tag = new_tag
 
@@ -76,6 +99,13 @@ class Font:
 
     def font_metrics(self, font_size):
         return self.font.font_metrics(font_size)
+
+    def get_bbox(self):
+        bbox = self.font.get_bbox()
+        bbox_rect = GArray()
+        for v in bbox:
+            bbox_rect.append(GNumber(v))
+        return bbox_rect
 
     def text_unicode_to_code(self, text):
         """Convert a text in unicode strings into character code string"""
@@ -104,6 +134,8 @@ class Font:
             self.dict.set(GName("LastChar"), GNumber(sorted_unicode_set[-1]))
             widths = self.get_widths()
             self.dict.set(GName("Widths"), widths)
+            # Font descriptor dictionary
+            
 
     def get_widths(self):
         if self.type == "TrueType" and len(self.unicode_set) > 0:
