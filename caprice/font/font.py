@@ -77,6 +77,8 @@ class Font:
             metrics = self.font.get_metrics()
             # ItalicAngle
             self.font_descriptor.set(GName("ItalicAngle"), GNumber(metrics["italicAngle"]))
+            # NOTE: PDF standard does not specifiy these metrics in 1000 units.
+            #       Check it later.
             # Ascent
             self.font_descriptor.set(GName("Ascent"), GNumber(metrics["ascender"]))
             # Descent
