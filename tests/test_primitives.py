@@ -229,10 +229,6 @@ class TestGDictionary(unittest.TestCase):
         self.assertEqual(d.compile_bytes(), expect)
 
 class TestGStream(unittest.TestCase):
-    def test_type(self):
-        s = GStream()
-        self.assertRaises(TypeError, s.set_content, (b"Hello, World"))
-
     def test_dict(self):
         s = GStream()
         s.set_content("Hello, World")

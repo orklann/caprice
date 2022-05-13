@@ -1,4 +1,6 @@
+import io
 from fontTools.ttLib import TTFont
+from fontTools.subset import Subsetter
 
 class TrueType:
     """TrueType class is for TrueType and OpenType fonts"""
@@ -49,4 +51,14 @@ class TrueType:
         w = weight / FNT_STEMV_WEIGHT
         return int(FNT_STEMV_MIN + w * w + 0.5)
 
+    def get_subset(self, unicodes=()):
+        text = ""
+        for code in unicodes:
+            text += (chr(code))
+        subsetter = Subsetter()
+        subsetter.populate(text=text)
+        subsetter.subset(self.font)
+        with io.BytesIO() as buffer:
+            self.font.save(buffer)
+            return buffer.getvalue()
 

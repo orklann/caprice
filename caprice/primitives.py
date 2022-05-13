@@ -256,9 +256,10 @@ class GStream(GObject):
         self.content = b""
 
     def set_content(self, c):
-        if not isinstance(c, str):
-            raise TypeError("GStream's `c` paramter of set_content method is not a str.")
-        self.content = str.encode(c)
+        if isinstance(c, str):
+            self.content = str.encode(c)
+        else:
+            self.content = c
 
     def bytes(self):
         # Flate encoder by zlib

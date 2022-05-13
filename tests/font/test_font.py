@@ -105,3 +105,12 @@ class TestFont(unittest.TestCase):
 
     def test_latin_chars(self):
         self.assertEqual(len(font.LATIN_CHARS), 229)
+
+    def test_get_subset(self):
+        doc = Document()
+        font_file = self.get_open_sans_path()
+        f = Font(font_file, doc, "F2")
+        f.add_to_unicode_set(ord("A"))
+        f.add_to_unicode_set(ord("B"))
+        f.add_to_unicode_set(ord("D"))
+        font_program = f.get_subset()

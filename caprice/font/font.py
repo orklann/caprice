@@ -141,8 +141,12 @@ class Font:
             self.dict.set(GName("LastChar"), GNumber(sorted_unicode_set[-1]))
             widths = self.get_widths()
             self.dict.set(GName("Widths"), widths)
-            # Font descriptor dictionary
-            
+            # Font descriptor dictionary: FontFile2 stream's content
+            subsetted = self.get_subset()
+            self.font_program.set_content(subsetted)
+
+    def get_subset(self):
+        return self.font.get_subset(self.unicode_set)
 
     def get_widths(self):
         if self.type == "TrueType" and len(self.unicode_set) > 0:
