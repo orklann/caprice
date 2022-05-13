@@ -88,6 +88,9 @@ class Document:
         # Before build pdf, let's update all pages content
         for page in self.pages:
             page.update_content()
+        # Update all fonts
+        for font in self.fonts_dict.values():
+            font.update()
         # Let's build pdf
         data = bytearray()
         offset = 0

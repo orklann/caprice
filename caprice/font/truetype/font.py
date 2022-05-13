@@ -1,3 +1,4 @@
+from math import ceil
 import io
 from fontTools.ttLib import TTFont
 from fontTools.subset import Subsetter
@@ -37,6 +38,16 @@ class TrueType:
         }
         return metrics
 
+    def font_metrics(self, font_size):
+        """Font metrics by applying font size"""
+        metrics = self.get_metrics()
+        UNITS_PER_EM = metrics["upm"]
+        scale = font_size / UNITS_PER_EM 
+        metrics["capHeight"] = ceil(metrics["capHeight"] * scale)
+        metrics["ascender"] = ceil(metrics["ascender"] * scale)
+        metrics["descender"] = ceil(metrics["descender"] * scale)
+        return metrics
+
     def get_bbox(self):
         metrics = self.get_metrics()
         return [metrics['xMin'], metrics['yMin'], metrics['xMax'], metrics['yMax']]
@@ -62,3 +73,12 @@ class TrueType:
             self.font.save(buffer)
             return buffer.getvalue()
 
+    def text_unicode_to_code(self, text):
+        """Convert a text in unicode strings into character code string"""
+        string = ""
+        for char in text:
+            c = ord(char)
+            s = " (\\" + "{0:o}".format(c) + ")"
+            string += s
+        string += " "
+        return string

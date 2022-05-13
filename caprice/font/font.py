@@ -94,6 +94,9 @@ class Font:
             self.font_program = GStream()
             font_program_indirect.set_object(self.font_program)
             self.dict.set(GName("FontFile2"), font_program_indirect.get_ref())
+            # Finally, font indirect object
+            self.indirect_obj = doc.new_indirect()
+            self.indirect_obj.set_object(self.dict)
         self.doc = doc
         self.tag = new_tag
 
@@ -121,9 +124,10 @@ class Font:
         return code_string
 
     def build_difference(self):
-        encoding_dict = self.dict.get(GName("Encoding"))
-        difference = self.font.build_difference()
-        encoding_dict.set(GName("Differences"), difference)
+        if self.type == "Type1":
+            encoding_dict = self.dict.get(GName("Encoding"))
+            difference = self.font.build_difference()
+            encoding_dict.set(GName("Differences"), difference)
 
     def add_to_unicode_set(self, unicode):
         if self.type == "TrueType":

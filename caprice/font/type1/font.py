@@ -28,7 +28,7 @@ class Type1:
     def font_metrics(self, font_size):
         scale = font_size / self.UNITS_PER_EM 
         metrics = {
-            "cap_height": ceil(self.afm.CapHeight * scale),
+            "capHeight": ceil(self.afm.CapHeight * scale),
             "ascender": ceil(self.afm.Ascender * scale),
             "descender": ceil(self.afm.Descender * scale)
         }
