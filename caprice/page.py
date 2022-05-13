@@ -1,6 +1,7 @@
 from .primitives import GDictionary, GName, GArray, GIndirect, GStream
 from .utils import rect_primitive
 from . import font
+from .page_size import A4
 
 class Page:
     """Page presents a page in PDF.
@@ -9,7 +10,7 @@ class Page:
     def __init__(self, doc):
         # Document for this page
         self.doc = doc
-        self.rect = [0, 0, 300, 144]
+        self.rect = [0, 0, A4[0], A4[1]]
         self.content = ""
         self.current_font = None
         self.current_font_size = 12
