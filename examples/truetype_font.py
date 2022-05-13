@@ -13,10 +13,10 @@ from caprice import font
 def save_pdf():
     doc = Document()
     page = doc.add_page()
-    font1 = page.add_font("examples/data/fonts/OpenSans-Regular.ttf")
+    font1 = page.add_font("examples/data/fonts/PoiretOne-Regular.ttf")
     page.use_font(font1)
-    page.set_font_size(12)
-    page.draw_text(0, 0, "Hello World!(A)")
+    page.set_font_size(48)
+    page.draw_text(0, 0, "CAPRICE!")
     home = os.path.expanduser("~")
     filename = os.path.join(home, "truetype_font.pdf")
     doc.save(filename)
