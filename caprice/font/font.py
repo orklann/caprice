@@ -1,4 +1,4 @@
-from ..primitives import GDictionary, GName, GNumber, GArray
+from ..primitives import GDictionary, GName, GNumber, GArray, GStream
 from .type1.font import Type1
 from .truetype.font import TrueType
 from .latin_chars import LATIN_CHARS
@@ -89,6 +89,11 @@ class Font:
             self.font_descriptor.set(GName("StemV"), GNumber(self.font.get_stemv()))
             font_descriptor_indirect.set_object(self.font_descriptor)
             self.dict.set(GName("FontDescriptor"), font_descriptor_indirect.get_ref())
+            # FontFile2
+            font_program_indirect = doc.new_indirect()
+            self.font_program = GStream()
+            font_program_indirect.set_object(self.font_program)
+            self.dict.set(GName("FontFile2"), font_program_indirect.get_ref())
         self.doc = doc
         self.tag = new_tag
 
