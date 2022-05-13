@@ -24,15 +24,18 @@ class TrueType:
         return font_name
 
     def get_metrics(self):
+        """Font metrics in 1000 units per em for font descriptor"""
+        UNITS_PER_EM = self.font['head'].unitsPerEm
+        scale = 1000.0 / UNITS_PER_EM 
         metrics = {
-            'upm': self.font['head'].unitsPerEm,
+            'upm': UNITS_PER_EM,
             'xMin': self.font['head'].xMin,
             'xMax': self.font['head'].xMax,
             'yMin': self.font['head'].yMin,
             'yMax': self.font['head'].yMax,
-            'capHeight': self.font['OS/2'].sCapHeight,
-            'ascender': self.font['OS/2'].sTypoAscender,
-            'descender': self.font['OS/2'].sTypoDescender,
+            'capHeight': self.font['OS/2'].sCapHeight * scale,
+            'ascender': self.font['OS/2'].sTypoAscender * scale,
+            'descender': self.font['OS/2'].sTypoDescender * scale,
             'italicAngle': self.font['post'].italicAngle,
             'usWeightClass': self.font['OS/2'].usWeightClass
         }
@@ -41,11 +44,12 @@ class TrueType:
     def font_metrics(self, font_size):
         """Font metrics by applying font size"""
         metrics = self.get_metrics()
-        UNITS_PER_EM = metrics["upm"]
+        UNITS_PER_EM = self.font['head'].unitsPerEm
         scale = font_size / UNITS_PER_EM 
-        metrics["capHeight"] = ceil(metrics["capHeight"] * scale)
-        metrics["ascender"] = ceil(metrics["ascender"] * scale)
-        metrics["descender"] = ceil(metrics["descender"] * scale)
+        metrics = {}
+        metrics["capHeight"] = ceil(self.font['OS/2'].sCapHeight * scale)
+        metrics["ascender"] = ceil(self.font['OS/2'].sTypoAscender * scale)
+        metrics["descender"] = ceil(self.font['OS/2'].sTypoDescender * scale)
         return metrics
 
     def get_bbox(self):
