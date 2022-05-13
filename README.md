@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/orklann/caprice/blob/5384bb806ae6ea39bfeeb81eebfb47bb12e07cbb/artwork/Caprice.png" width=337 height=100 />
+  <img src="https://github.com/orklann/caprice/blob/5384bb806ae6ea39bfeeb81eebfb47bb12e07cbb/artwork/Caprice.png" />
 </p>
 
 
