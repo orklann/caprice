@@ -2,6 +2,8 @@
   <img src="https://github.com/orklann/caprice/blob/87a3b270c7c8a4df590cb813ac2a45649c3dbbc3/artwork/Caprice_new.png" width=128 height=128 />
 </p>
 
+
+[![PyPI version](https://badge.fury.io/py/caprice.svg)](https://badge.fury.io/py/caprice) 
 [![Run Tests](https://github.com/orklann/caprice/actions/workflows/main.yml/badge.svg)](https://github.com/orklann/caprice/actions/workflows/main.yml)  
 
 Caprice
