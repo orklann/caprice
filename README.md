@@ -32,7 +32,7 @@ doc.save("hello.pdf")
 How to run unit tests
 ---------------------
 ```
-python -m unittest
+make test
 ```
 
 Author
