@@ -21,8 +21,6 @@ class TrueType:
         return tag
 
     def __init__(self, font_file):
-        with open(font_file, "rb") as ffh:
-            self.font_file_bytes = ffh.read()
         self.font = TTFont(font_file)
         self.font_name = None
 
