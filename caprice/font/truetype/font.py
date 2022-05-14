@@ -1,15 +1,34 @@
 from math import ceil
 import io
+import random
 from fontTools.ttLib import TTFont
 from fontTools.subset import Subsetter
 
 class TrueType:
     """TrueType class is for TrueType and OpenType fonts"""
-    
+    subset_tags = []
+
+    @classmethod
+    def generate_subset_tag(cls):
+        LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        tag = ""
+        for i in range(0, 6):
+            l = LETTERS[random.randint(0, len(LETTERS) - 1)]
+            tag += l
+        while tag in cls.subset_tags:
+            tag = cls.generate_subset_tag()
+        cls.subset_tags.append(tag)
+        return tag
+
     def __init__(self, font_file):
+        with open(font_file, "rb") as ffh:
+            self.font_file_bytes = ffh.read()
         self.font = TTFont(font_file)
+        self.font_name = None
 
     def get_base_font(self):
+        if self.font_name is not None:
+            return self.font_name
         name = ""
         for record in self.font['name'].names:
             if b'\x00' in record.string:
@@ -20,8 +39,11 @@ class TrueType:
                 name = name_str
             if name: 
                 break
-        font_name = "".join([c for c in name if c.lower() in "abcdefghijklmnopqrstuvwxyz-"])
-        return font_name
+        self.font_name = "".join([c for c in name if c.lower() in "abcdefghijklmnopqrstuvwxyz-"])
+        # Subset font name
+        tag = TrueType.generate_subset_tag()
+        self.font_name = tag + "+" + self.font_name
+        return self.font_name
 
     def get_metrics(self):
         """Font metrics in 1000 units per em for font descriptor"""

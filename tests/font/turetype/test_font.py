@@ -17,4 +17,10 @@ class TestTrueType(unittest.TestCase):
     def test_get_base_font(self):
         font_file = self.get_font_file_path()
         font = TrueType(font_file)
-        self.assertEqual(font.get_base_font(), "RobotoMonoNerdMediumPatchRegular")
+        font_name = font.get_base_font().split("+")[1]
+        self.assertEqual(font_name, "RobotoMonoNerdMediumPatchRegular")
+
+    def test_generate_subset_tag(self):
+        tag1 = TrueType.generate_subset_tag()
+        tag2 = TrueType.generate_subset_tag()
+        self.assertTrue(tag1 != tag2)

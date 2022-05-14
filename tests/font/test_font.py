@@ -29,7 +29,6 @@ class TestFont(unittest.TestCase):
         font_dict = f.dict
         self.assertEqual(font_dict.get(GName("Type")), GName("Font"))
         self.assertEqual(font_dict.get(GName("Subtype")), GName("TrueType"))
-        self.assertEqual(font_dict.get(GName("BaseFont")), GName("RobotoMonoNerdMediumPatchRegular"))
 
     def test_update(self):
         doc = Document()

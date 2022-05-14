@@ -87,13 +87,13 @@ class Font:
             self.font_descriptor.set(GName("CapHeight"), GNumber(metrics["capHeight"]))
             # StemV
             self.font_descriptor.set(GName("StemV"), GNumber(self.font.get_stemv()))
-            font_descriptor_indirect.set_object(self.font_descriptor)
-            self.dict.set(GName("FontDescriptor"), font_descriptor_indirect.get_ref())
             # FontFile2
             font_program_indirect = doc.new_indirect()
             self.font_program = GStream()
             font_program_indirect.set_object(self.font_program)
-            self.dict.set(GName("FontFile2"), font_program_indirect.get_ref())
+            self.font_descriptor.set(GName("FontFile2"), font_program_indirect.get_ref())
+            font_descriptor_indirect.set_object(self.font_descriptor)
+            self.dict.set(GName("FontDescriptor"), font_descriptor_indirect.get_ref())
             # Finally, font indirect object
             self.indirect_obj = doc.new_indirect()
             self.indirect_obj.set_object(self.dict)
