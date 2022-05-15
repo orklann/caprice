@@ -102,7 +102,7 @@ class TrueType:
         string = ""
         for char in text:
             c = ord(char)
-            s = " (\\" + "{0:o}".format(c) + ")"
+            s = " <" + "{0:X}".format(c) + ">"
             string += s
         string += " "
         return string
