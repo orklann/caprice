@@ -173,6 +173,7 @@ class Font:
                 else:
                     widths.append(GNumber(0))
             return widths
+
     def compile_str(self):
         """Only for tests, we use primitives's compile_str()"""
         self.build_difference()
