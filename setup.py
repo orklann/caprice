@@ -25,7 +25,7 @@ setup(
     url='https://github.com/orklann/caprice',
     description='Robust Python library for generating PDF',
     long_description=__doc__,
-    author='Aaron Elkins',
+    author='Tommy Jeff',
     author_email='threcius@yahoo.com',
     license='GPLv2.0',
     platforms='any'
