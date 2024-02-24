@@ -39,7 +39,7 @@ make test
 
 Author
 ------
-[Aaron Elkins](https://twitter.com/ryh1113) ([https://rkt.pixelegg.me](https://rkt.pixelegg.me/))
+[Tommy Jeff](https://twitter.com/ryh1113) ([https://rkt.pixelegg.me](https://rkt.pixelegg.me/))
 
 License
 -------
